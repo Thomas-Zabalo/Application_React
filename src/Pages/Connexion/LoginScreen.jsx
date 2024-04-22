@@ -39,7 +39,7 @@ export default function LoginScreen({ navigation }) {
 
     const loginUser = async (userData) => {
         try {
-            const response = await fetch('https://example.com/api/login', {
+            const response = await fetch('https://zabalo.alwaysdata.net/sae401/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,18 +48,16 @@ export default function LoginScreen({ navigation }) {
             });
             if (response.ok) {
                 const responseData = await response.json();
-                console.log(responseData);
-                // Stocker les données utilisateur dans AsyncStorage ou dans le state de l'application
+                localStorage.setItem('accessToken', responseData.accessToken); // Stocker le token
                 navigation.navigate('Home');
             } else {
                 console.error('Error logging in user');
-                // Afficher un message d'erreur à l'utilisateur
             }
         } catch (error) {
             console.error('Error:', error);
-            // Afficher un message d'erreur à l'utilisateur
         }
     };
+
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -117,6 +115,7 @@ export default function LoginScreen({ navigation }) {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            href="Profil"
                         >
                             Se connecter
                         </Button>

@@ -1,19 +1,26 @@
-import React, { useEffect, useState, useParams } from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Card, CardContent, CardActions, Button, Typography, Grid } from "@mui/material";
 import Personnage from "../../models/PersonnageController";
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Sidebar from "../../components/Nav/Sidebar";
 import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
+import SearchBar from "../../components/Home/SearchBar";
 
 export default function Liste() {
-    const [lPerso, setLPerso] = useState([]);
-    const url = "https://zabalo.alwaysdata.net/sae401/api/personnages";
 
-    const { nom } = useParams()
-    if (nom) {
-        url += `?nom=${nom}`;
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    let nom = searchParams.get('nom');
+    
+
+    console.log(nom)
+    const [lPerso, setLPerso] = useState([]);
+    let url = "https://zabalo.alwaysdata.net/sae401/api/personnages";
+
+    if (nom != null) {
+        url += '?nom=' + nom
     }
 
     useEffect(() => {
@@ -53,18 +60,7 @@ export default function Liste() {
             <Container>
                 <Box sx={{ pt: { xs: 14, sm: 20 }, pb: { xs: 8, sm: 12 } }}>
                     <Stack>
-                        <TextField
-                            id="outlined-basic"
-                            hiddenLabel
-                            size="small"
-                            variant="outlined"
-                            aria-label="Enter your email address"
-                            placeholder="Rechercher un personnage"
-                            inputProps={{
-                                autocomplete: 'off',
-                                ariaLabel: 'Enter your email address',
-                            }}
-                        />
+                        <SearchBar />
                     </Stack>
                 </Box>
                 <Grid container spacing={4}>

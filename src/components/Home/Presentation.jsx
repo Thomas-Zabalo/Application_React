@@ -1,19 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import SearchBar from './SearchBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 export default function Search() {
-    const [nom, setNom] = useState('');
-
-    const handleSearch = () => {
-        <link rel="stylesheet" href={"/liste/" + { nom }} />
-        setNom('')
-    };
-
 
     return (
         <Box>
@@ -58,16 +51,7 @@ export default function Search() {
                         Personnalisez votre propre héros ou héroïne dans Baldur's Gate 3 grâce à notre application. Choisissez parmi une large gamme de races, de classes et de compétences pour créer des personnages uniques et sur mesure.
                     </Typography>
 
-                    <TextField
-                        id="outlined-basic"
-                        hiddenLabel
-                        size="small"
-                        variant="outlined"
-                        placeholder="Rechercher un personnage"
-                        onChange={(e) => setNom(e.target.value)}
-                        value={nom}
-                        onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                    />
+                    <SearchBar />
                 </Stack>
                 <Stack
                     direction={{ xs: 'column', sm: 'row' }}

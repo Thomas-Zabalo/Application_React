@@ -66,9 +66,9 @@ export default function ListeHome() {
                                     {'"a benevolent smile"'}
                                 </Typography>
                             </CardContent>
-                            <CardActions>
-                                <Button variant="contained" href={"/detail/" + item.id}>Details</Button>
-                            </CardActions>
+                                <CardActions>
+                                    <Button variant="contained" href={"/detail/" + item.id}>Details</Button>
+                                </CardActions>
                         </Card>
                     </Grid>
                 ))}
