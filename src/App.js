@@ -7,7 +7,8 @@ import LoginScreen from './Pages/Connexion/LoginScreen';
 import Liste from './Pages/ListPerso/ListeScreen';
 import Detail from './Pages/ListPerso/Detail';
 import ProfilScreen from './Pages/Profil/ProfilScreen';
-import Creation from './Pages/Creation/Races';
+import Race from './Pages/Creation/Races';
+import SousRace from './Pages/Creation/SousRaces';
 import ProtectedRoute from './components/Protected';
 
 export default function App() {
@@ -26,7 +27,8 @@ export default function App() {
               <ProfilScreen />
             </ProtectedRoute>
           } />
-          <Route path="/Nouveau" element={<Creation />} />
+          <Route path="/Nouveau" element={<Race />} />
+          <Route path="/SousRace" element={<SousRace />} />
         </Routes>
       </div>
     </Router>

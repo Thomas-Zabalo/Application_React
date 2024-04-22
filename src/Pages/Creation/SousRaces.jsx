@@ -1,53 +1,76 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Card, CardContent, CardActions, Typography, Button, CardMedia, Box } from '@mui/material';
 import Sidebar from "../../components/Nav/Sidebar";
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-function Creation() {
-    const [SousRaces, setSousRaces] = useState([]);
+
+function SousRace() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [sousRaces, setSousRaces] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
     const [selectedSousRace, setSelectedSousRace] = useState(null);
 
-    const url = "https://zabalo.alwaysdata.net/sae401/api/sousraces";
+    // Extract raceId from location state
+    const raceId = location.state ? location.state.raceId : null;
+
+    // Construct the API URL with the raceId
+    const url = `https://zabalo.alwaysdata.net/sae401/api/races/${raceId}`;
 
     useEffect(() => {
-        getSousRaces();
-    }, []);
+        if (raceId) {
+            getSousRaces();
+        } else {
+            console.error('No raceId provided');
+        }
+    }, [raceId]); 
 
     function getSousRaces() {
         const fetchOptions = { method: "GET" };
         fetch(url, fetchOptions)
-            .then(response => response.json())
-            .then(data => setSousRaces(data))
-            .catch(error => console.log(error));
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setSousRaces(data.sousraces); 
+            })
+            .catch(error => {
+                console.error('Error fetching sous races:', error);
+            });
     }
+    
 
     const toggleSelect = (itemId) => {
         setSelectedItem(itemId);
-        const selected = SousRaces.find(SousRace => SousRace.id === itemId);
+        const selected = sousRaces.find(sousRace => sousRace.id === itemId);
         setSelectedSousRace(selected);
     };
 
     return (
         <Box sx={{ display: 'flex' }}>
             <Sidebar />
-            <CardContent sx={{ flexGrow: 1, overflow: "auto", backgroundColor: '#f4f6f8' }}>
+            <Box sx={{ flexGrow: 1, overflow: "auto", backgroundColor: '#f4f6f8', display: 'flex' }}>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', minWidth: '300px', maxWidth: '500px' }}>
                         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-                            {SousRaces.map((SousRace) => {
-                                const isSelected = selectedItem === SousRace.id;
+                            {sousRaces.map((race) => {
+                                const isSelected = selectedItem === race.id;
                                 return (
-                                    <Card key={SousRace.id} sx={{ width: 120, m: 1 }}>
+                                    <Card key={race.id} sx={{ width: 120, m: 1 }}>
                                         <CardMedia
                                             component="img"
                                             height="140"
-                                            image={SousRace.icone}
-                                            alt={SousRace.nom}
+                                            image={race.icone}
+                                            alt={race.nom}
                                             sx={{ backgroundColor: "black" }}
                                         />
                                         <CardContent sx={{ p: 1 }}>
                                             <Typography variant="h6" sx={{ fontSize: 12, textAlign: 'center' }}>
-                                                {SousRace.nom}
+                                                {race.nom}
                                             </Typography>
                                         </CardContent>
                                         <CardActions sx={{ justifyContent: 'center' }}>
@@ -61,7 +84,7 @@ function Creation() {
                                                     fontSize: 10,
                                                     p: 0.5
                                                 }}
-                                                onClick={() => toggleSelect(SousRace.id)}
+                                                onClick={() => toggleSelect(race.id)}
                                             >
                                                 {isSelected ? "✓" : "Choisir"}
                                             </Button>
@@ -71,7 +94,7 @@ function Creation() {
                             })}
                         </div>
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', minWidth: '300px', maxWidth: '500px' }}>
                         {selectedSousRace && (
                             <Box sx={{ p: 2 }}>
                                 <Typography variant="h4" sx={{ mb: 1 }}>{selectedSousRace.nom}</Typography>
@@ -80,12 +103,13 @@ function Creation() {
                         )}
                     </Grid>
                 </Grid>
-            </CardContent>
+            </Box>
             {selectedItem !== null && (
                 <Box sx={{ position: "absolute", bottom: 20, right: 20 }}>
                     <Button
                         variant="contained"
                         sx={{ backgroundColor: "#D0BCFF", borderRadius: 20, padding: "8px 24px" }}
+                        onClick={() => navigate('/sousrace', { state: { raceId: selectedItem } })}
                     >
                         Suivant
                     </Button>
@@ -95,4 +119,4 @@ function Creation() {
     );
 }
 
-export default Creation;
+export default SousRace;
