@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -10,9 +10,9 @@ export default function Search() {
     const [nom, setNom] = useState('');
 
     const handleSearch = () => {
-        <link rel="stylesheet" href={"/liste/" + {nom}} />
-         setNom('')
-     };
+        <link rel="stylesheet" href={"/liste/" + { nom }} />
+        setNom('')
+    };
 
 
     return (
@@ -64,9 +64,9 @@ export default function Search() {
                         size="small"
                         variant="outlined"
                         placeholder="Rechercher un personnage"
-                        onChangeText={setNom}
+                        onChange={(e) => setNom(e.target.value)}
                         value={nom}
-                        onSubmitEditing={handleSearch}
+                        onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                     />
                 </Stack>
                 <Stack
