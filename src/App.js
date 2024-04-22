@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import HomeScreen from './Pages/Home/HomeScreen';
@@ -8,24 +8,9 @@ import Liste from './Pages/ListPerso/ListeScreen';
 import Detail from './Pages/ListPerso/Detail';
 import ProfilScreen from './Pages/Profil/ProfilScreen';
 import Creation from './Pages/Creation/CreationScreen';
+import ProtectedRoute from './components/Protected';
 
 export default function App() {
-  // Fonction pour récupérer des données
-  const retrieveData = async () => {
-    try {
-      const accessToken = await localStorage.getItem('@UserData:accessToken');
-      const user_id = await localStorage.getItem('@UserData:user_id');
-      if (accessToken !== null && user_id !== null) {
-        console.log(accessToken, user_id);
-      }
-    } catch (error) {
-      console.error('Erreur lors de la récupération des données:', error);
-    }
-  };
-
-  useEffect(() => {
-    retrieveData();
-  }, []);
 
   return (
     <Router>
@@ -36,7 +21,11 @@ export default function App() {
           <Route path="/Login" element={<LoginScreen />} />
           <Route path="/Liste" element={<Liste />} />
           <Route path="/Detail/:idPerso" element={<Detail />} />
-          <Route path="/Profil" element={<ProfilScreen />} />
+          <Route path="/Profil" element={
+            <ProtectedRoute>
+              <ProfilScreen />
+            </ProtectedRoute>
+          } />
           <Route path="/Nouveau" element={<Creation />} />
         </Routes>
       </div>

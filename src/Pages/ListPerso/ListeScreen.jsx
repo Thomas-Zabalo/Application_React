@@ -63,6 +63,7 @@ export default function Liste() {
                         <SearchBar />
                     </Stack>
                 </Box>
+                
                 <Grid container spacing={4}>
                     {lPerso.map((item, index) => (
                         <Grid item key={index} xs={12} sm={6} md={4} lg={3} sx={{ paddingRight: 0, marginRight: 0 }}>

@@ -5,6 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import VpnKeyRoundedIcon from '@mui/icons-material/VpnKeyRounded';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
+import Sidebar from '../../components/Nav/Sidebar';
 
 const defaultTheme = createTheme();
 
@@ -28,6 +29,7 @@ export default function SignUpScreen() {
     return (
         <ThemeProvider theme={defaultTheme}>
             <Container component="main" maxWidth="xs">
+                <Sidebar />
                 <CssBaseline />
                 <Box
                     sx={{

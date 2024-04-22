@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -8,36 +8,25 @@ import Avatar from '@mui/material/Avatar';
 import { green } from '@mui/material/colors';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button'
-
-
-import Sidebar from '../../components/Nav/Sidebar'
-
+import Button from '@mui/material/Button';
+import Sidebar from '../../components/Nav/Sidebar';
+import PersoUser from '../../components/ListPersoUser/PersoUser';
 
 function ProfilScreen() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
 
-    const [Name, setName] = useState('');
-    const [Email, setEmail] = useState('');
+    useEffect(() => {
+        const accessToken = localStorage.getItem('userToken');
+        console.log(accessToken)
+        const userId = localStorage.getItem('userData');
+        if (accessToken && userId) {
+            const url = `https://zabalo.alwaysdata.net/sae401/api/users/${userId}`;
+            getUser(url, accessToken);
+        }
+    }, []);
 
-    // useEffect(() => {
-    //     retrieveData();
-    // }, []);
 
-    // const retrieveData = async () => {
-    //     try {
-    //         const accessToken = await AsyncStorage.getItem('@UserData:accessToken');
-    //         const user_id = await AsyncStorage.getItem('@UserData:user_id');
-    //         if (accessToken !== null && user_id !== null) {
-    //             const newUrl = `https://zabalo.alwaysdata.net/sae401/api/users/` + user_id;
-    //             getUser(newUrl, accessToken);
-    //         } else {
-    //             setUser(null);
-    //         }
-    //     } catch (error) {
-    //         console.error('Erreur lors de la récupération des données:', error);
-    //         setUser(null);
-    //     }
-    // };
 
     function getUser(url, token) {
         const fetchOptions = {
@@ -47,18 +36,15 @@ function ProfilScreen() {
             }
         };
         fetch(url, fetchOptions)
-            .then((response) => {
-                return response.json();
-            })
-            .then((dataJSON) => {
+            .then(response => response.json())
+            .then(dataJSON => {
                 setName(dataJSON.name);
                 setEmail(dataJSON.email);
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(error => {
+                console.error('Failed to fetch user data:', error);
             });
     }
-
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -67,53 +53,52 @@ function ProfilScreen() {
                 <Box m={12}>
                     <Card>
                         <Box pt={2} px={2}>
-                            <Box mb={0.5}>
-                                <Typography variant="h2" fontWeight="medium">
-                                    Mon compte :
-                                </Typography>
-                            </Box>
+                            <Typography variant="h2" fontWeight="medium">
+                                Mon compte :
+                            </Typography>
                         </Box>
                         <Box p={2}>
                             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-
                                 <Grid item sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                     <Avatar sx={{ bgcolor: green[500], width: 80, height: 80, margin: 2 }} variant="rounded">
                                         <AssignmentIcon />
                                     </Avatar>
                                     <Button variant="contained">Modifier</Button>
                                 </Grid>
-
-                                <Grid item xs={2} sm={4} md={4} >
+                                <Grid item xs={2} sm={4} md={4}>
                                     <TextField
                                         margin="normal"
                                         required
                                         fullWidth
-                                        value={Email}
-                                        onChangeText={setEmail}
+                                        value={email}
                                         id="email"
-                                        label="Addresse Email"
-                                        contentEditable={false}
+                                        label="Adresse Email"
+                                        InputProps={{ readOnly: true }}
                                     />
                                 </Grid>
-                                <Grid item xs={2} sm={4} md={4} >
+                                <Grid item xs={2} sm={4} md={4}>
                                     <TextField
                                         margin="normal"
                                         required
                                         fullWidth
+                                        value={name}
                                         id="name"
                                         label="Nom d'utilisateur"
-                                        value={Name}
-                                        onChangeText={setName}
-                                        contentEditable={false}
+                                        InputProps={{ readOnly: true }}
                                     />
                                 </Grid>
                             </Grid>
+                            <PersoUser/>
                         </Box>
+                       
                     </Card>
+
                 </Box>
+
+
             </Container>
         </Box>
-    )
+    );
 }
 
-export default ProfilScreen
+export default ProfilScreen;
