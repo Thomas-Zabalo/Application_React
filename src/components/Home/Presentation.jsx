@@ -10,9 +10,9 @@ export default function Search() {
     const [nom, setNom] = useState('');
 
     const handleSearch = () => {
-       <link rel="stylesheet" href="/Liste" />
-        setNom('')
-    };
+        <link rel="stylesheet" href={"/liste/" + {nom}} />
+         setNom('')
+     };
 
 
     return (

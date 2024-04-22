@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useParams } from "react";
 import { Card, CardContent, CardActions, Button, Typography, Grid } from "@mui/material";
 import Personnage from "../../models/PersonnageController";
 import Container from '@mui/material/Container';
@@ -11,8 +11,9 @@ export default function Liste() {
     const [lPerso, setLPerso] = useState([]);
     const url = "https://zabalo.alwaysdata.net/sae401/api/personnages";
 
-    if (searchNom) {
-        url += `?nom=${searchNom}`;
+    const { nom } = useParams()
+    if (nom) {
+        url += `?nom=${nom}`;
     }
 
     useEffect(() => {
