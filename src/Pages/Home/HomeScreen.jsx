@@ -13,7 +13,7 @@ export default function LandingPage() {
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box sx={{ display: 'flex', mb:5}}>
-                <NavigationComponent />
+                <Sidebar />
                 <Container>
                     <CssBaseline />
                     <Search />

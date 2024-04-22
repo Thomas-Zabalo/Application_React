@@ -1,62 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { NavigationRail } from "@/core/ui/components";
-import { Avatar } from '@mui/material/Avatar';
-import {
-  MdMenu, MdAttachFile, MdMail, MdFavorite, MdMap, MdMessage
-} from 'react-icons/md'; 
+import { List, ListItem, ListItemIcon, ListItemText, Avatar, Box } from '@mui/material';
+import { MdMenu, MdAttachFile, MdMail, MdFavorite, MdMap, MdMessage, MdSettings } from 'react-icons/md';
 
 function NavigationComponent() {
-  const handleClick = (event) => {
-    // Placeholder for click event logic
-    console.log("Navigation item clicked:", event);
-  };
+    return (
+        <Box sx={{ width: '80px', display: 'flex', flexDirection: 'column', justifyContent: 'start', gap: '12px', borderRadius: 'extra-large', bgcolor: 'surface-container', py: '16px', color: 'on-surface', height: '100vh' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start', gap: '12px' }}>
+                {/* Top icons */}
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                    <Box sx={{ position: 'relative', display: 'flex', justifyContent: 'center', width: '100%' }}>
+                        <ListItem button component={Link} to="/menu" sx={{ height: '56px', borderRadius: '50%', px: '16px', '&:hover': { bgcolor: 'surface-container-highest' } }}>
+                            <ListItemIcon><MdMenu /></ListItemIcon>
+                        </ListItem>
+                    </Box>
+                </Box>
 
-  return (
-    <NavigationRail
-      top={
-        <>
-          <NavigationRail.Item icon={<MdMenu size={24} />} onClick={handleClick} />
-        </>
-      }
-      center={
-        <>
-          <NavigationRail.Item component={Link} to="/"
-            icon={<MdAttachFile size={24} />}
-            label={"Accueil"}
-          />
-          <NavigationRail.Item component={Link} to="/Liste"
-            icon={<MdMail size={24} />}
-            onClick={handleClick}
-            label={"Liste"}
-          />
-          <NavigationRail.Item component={Link} to="/Nouveau"
-            icon={<MdFavorite size={24} />}
-            onClick={handleClick}
-            label={"Nouveau"}
-          />
-          <NavigationRail.Item component={Link} to="/Profil"
-            icon={<MdMap size={24} />}
-            onClick={handleClick}
-            label={"Profil"}
-          />
-          <NavigationRail.Item component={Link} to="/Admin"
-            icon={<MdMessage size={24} />}
-            onClick={handleClick}
-            label={"Admin"}
-          />
-        </>
-      }
-      bottom={
-        <>
-          <Avatar
-            sx={{ width: 56, height: 56 }}
-            src={"https://images.unsplash.com/photo-1665174271625-178021f8b1a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80"}
-          />
-        </>
-      }
-    />
-  );
+                {/* Center icons */}
+                <List sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'start', gap: '8px', py: '16px' }}>
+                    <ListItem button component={Link} to="/" sx={{ height: '32px', borderRadius: '50%', px: '16px', '&:hover': { bgcolor: 'surface-container-highest' } }}>
+                        <ListItemIcon><MdAttachFile /></ListItemIcon>
+                        <ListItemText primary="Files" sx={{ pb: '6px', pt: '4px', fontSize: 'label-medium', textAlign: 'center' }} />
+                    </ListItem>
+                    {/* More items */}
+                </List>
+
+            </Box>
+        </Box>
+    );
 }
 
 export default NavigationComponent;

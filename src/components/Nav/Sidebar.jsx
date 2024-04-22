@@ -30,10 +30,10 @@ function Sidebar() {
             >
                 <Box sx={{ overflow: 'auto' }}>
                     <List>
-                        <ListItem disablePadding component={Link} to="/" sx={{ color: 'black' }}>
+                        <ListItem disablePadding component={Link} to="/" sx={{ color: 'black', display:'flex', alignItems:'center' }}>
                             <ListItemButton>
                                 <ListItemIcon>
-                                    <HomeIcon />
+                                    <HomeIcon sx={{minWidth: 0}}/>
                                 </ListItemIcon>
                                 <ListItemText primary="Accueil" />
                             </ListItemButton>
