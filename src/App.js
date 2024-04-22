@@ -7,7 +7,7 @@ import LoginScreen from './Pages/Connexion/LoginScreen';
 import Liste from './Pages/ListPerso/ListeScreen';
 import Detail from './Pages/ListPerso/Detail';
 import ProfilScreen from './Pages/Profil/ProfilScreen';
-import Creation from './Pages/Creation/CreationScreen';
+import Creation from './Pages/Creation/Races';
 import ProtectedRoute from './components/Protected';
 
 export default function App() {

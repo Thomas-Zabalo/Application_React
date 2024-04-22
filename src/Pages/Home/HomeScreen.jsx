@@ -6,13 +6,14 @@ import Container from '@mui/material/Container'; // Importez Container depuis @m
 import Sidebar from '../../components/Nav/Sidebar';
 import ListeHome from '../../components/Home/ListeHomeScreen';
 import Search from '../../components/Home/Presentation';
+import NavigationComponent from '../../components/Nav/Navrail';
 const defaultTheme = createTheme();
 
 export default function LandingPage() {
     return (
         <ThemeProvider theme={defaultTheme}>
             <Box sx={{ display: 'flex', mb:5}}>
-                <Sidebar />
+                <NavigationComponent />
                 <Container>
                     <CssBaseline />
                     <Search />
