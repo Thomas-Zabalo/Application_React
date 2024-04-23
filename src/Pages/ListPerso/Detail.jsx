@@ -4,9 +4,6 @@ import Sidebar from "../../components/Nav/Sidebar";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import Avatar from "@mui/material/Avatar";
 import Dashboard from "../../components/Card";
 import Personnage from "../../models/PersonnageController";
 
