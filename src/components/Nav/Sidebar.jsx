@@ -13,6 +13,7 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import { useAuth } from '../../components/AuthContext';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 function Sidebar() {
     const { userAdmin, userToken, logout } = useAuth();
@@ -112,7 +113,7 @@ function Sidebar() {
                             <ListItem disablePadding component={Link} to="/" sx={{ color: 'black' }} >
                                 <ListItemButton onClick={deconnexion}>
                                     <ListItemIcon>
-                                        <SupervisorAccountIcon />
+                                        <LogoutIcon />
                                     </ListItemIcon>
                                     <ListItemText primary="Se déconnecter" />
                                 </ListItemButton>

@@ -73,7 +73,7 @@ export default function SignUpScreen() {
                 setOpenSnackbar(true);
                 setTimeout(() => {
                     navigate('/Login'); 
-                }, 3000);
+                }, 1500);
             })
             .catch((error) => {
                 console.error('Error:', error);

@@ -7,13 +7,14 @@ import Box from '@mui/material/Box';
 import Sidebar from "../../components/Nav/Sidebar";
 import Stack from '@mui/material/Stack';
 import SearchBar from "../../components/Home/SearchBar";
+import TextListe from "../../components/Home/TextList";
 
 export default function Liste() {
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     let nom = searchParams.get('nom');
-    
+
 
     console.log(nom)
     const [lPerso, setLPerso] = useState([]);
@@ -60,10 +61,11 @@ export default function Liste() {
             <Container>
                 <Box sx={{ pt: { xs: 14, sm: 20 }, pb: { xs: 8, sm: 12 } }}>
                     <Stack>
+                        <TextListe />
                         <SearchBar />
                     </Stack>
                 </Box>
-                
+
                 <Grid container spacing={4}>
                     {lPerso.map((item, index) => (
                         <Grid item key={index} xs={12} sm={6} md={4} lg={3} sx={{ paddingRight: 0, marginRight: 0 }}>

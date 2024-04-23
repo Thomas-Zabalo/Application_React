@@ -5,7 +5,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container'; // Importez Container depuis @mui/material
 import Sidebar from '../../components/Nav/Sidebar';
 import ListeHome from '../../components/Home/ListeHomeScreen';
-import Search from '../../components/Home/Presentation';
+import Search from '../../components/Home/TextHome';
 
 const defaultTheme = createTheme();
 
