@@ -14,10 +14,16 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Sidebar from '../../components/Nav/Sidebar';
 import { useAuth } from '../../components/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
 
 const defaultTheme = createTheme();
 
 export default function LoginScreen() {
+
+    const url = "https://zabalo.alwaysdata.net/sae401/api/login";
+
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passVisi, setPassVisi] = useState(true);
@@ -28,44 +34,51 @@ export default function LoginScreen() {
 
     const handleLogin = (event) => {
         event.preventDefault();
+        console.log("Login attempt");  // Vérifiez si cela s'imprime lorsque vous essayez de vous connecter.
         if (email !== '' && password !== '') {
             const userData = {
                 email: email,
                 password: password
             };
-            console.log(userData)
+            console.log("Sending data", userData);  // Vérifiez les données qui seront envoyées.
             loginUser(userData);
-
         }
     };
+    
 
 
-    const loginUser = async (userData) => {
-        try {
-            const response = await fetch('https://zabalo.alwaysdata.net/sae401/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(userData),
+    function loginUser(userData) {
+        const fetchOptions = {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData)
+        };
+
+        fetch(url, fetchOptions)
+            .then((response) => {
+                console.log(response);
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la création du compte');
+                }
+                return response.json();
+            })
+            .then((dataJSON) => {
+                console.log(dataJSON);
+                login(dataJSON.accessToken, dataJSON.user_id);
+                navigate('/Profil'); 
+            })
+            .catch((error) => {
+                console.error('Error:', error);
             });
-            if (response.ok) {
-                const responseData = await response.json();
-                console.log(responseData)
-                login(responseData.accessToken, responseData.user_id);
-            } else {
-                console.error('Error logging in user');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
+    }
 
     useEffect(() => {
         const token = localStorage.getItem('userToken');
         const id = localStorage.getItem('userData');
-        console.log(token);
-        console.log(id);
+        // console.log(token);
+        // console.log(id);
     }, []);
 
     return (
@@ -90,7 +103,7 @@ export default function LoginScreen() {
                         <Typography component="h1" variant="h5">
                             Connexion
                         </Typography>
-                        <Box component="form" onSubmit={handleLogin} noValidate sx={{ mt: 1 }}>
+                        <Box component="form"  noValidate sx={{ mt: 1 }}>
                             <TextField
                                 margin="normal"
                                 required
@@ -127,10 +140,11 @@ export default function LoginScreen() {
                                 fullWidth
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
-                                href="Profil"
-                            >
+                                onClick={handleLogin}
+                                href="Profil">
                                 Se connecter
                             </Button>
+                            
                             <Grid container>
                                 <Grid item xs>
                                     <Typography>

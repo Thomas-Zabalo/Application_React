@@ -40,7 +40,8 @@ export default function SignUpScreen() {
             };
             console.log(userData)
             getUtilisateur(userData);
-        } else {
+        } 
+        else {
             setSnackbarMessage('Veuillez remplir tous les champs.');
             setOpenSnackbar(true);
             const timer = setTimeout(() => {
@@ -62,9 +63,9 @@ export default function SignUpScreen() {
         fetch(url, fetchOptions)
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error('Erreur lors de la création du compte');  // Lance une exception si le statut HTTP n'est pas ok
+                    throw new Error('Erreur lors de la création du compte'); 
                 }
-                return response.json();  // Continue avec la transformation en JSON si tout est ok
+                return response.json(); 
             })
             .then((dataJSON) => {
                 console.log(dataJSON);
