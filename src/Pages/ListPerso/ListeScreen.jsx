@@ -44,7 +44,9 @@ export default function Liste() {
                         p.nom,
                         p.id,
                         p.user,
-                        p.sousclasses
+                        p.sousclasses,
+                        p.sousraces,
+                        p.origines
                     );
                     l.push(personnage);
                 }

@@ -1,5 +1,5 @@
 export default class Personnage {
-    constructor(sousraces_id, origines_id, sousclasses_id, users_id, nom, id, user, sousclasses) {
+    constructor(sousraces_id, origines_id, sousclasses_id, users_id, nom, id, user, sousclasses, sousraces, origines) {
         this._sousraces_id = sousraces_id;
         this._origines_id = origines_id;
         this._sousclasses_id = sousclasses_id;
@@ -8,6 +8,9 @@ export default class Personnage {
         this._id = id;
         this._user = user;
         this._sousclasses = sousclasses;
+        this._sousraces = sousraces;
+        this._origines = origines;
+
     }
 
     get sousraces_id() {
@@ -42,6 +45,13 @@ export default class Personnage {
         return this._sousclasses;
     }
 
+    get sousraces() {
+        return this._sousraces;
+    }
+
+    get origines() {
+        return this._origines;
+    }
     toJSON() {
         return {
             sousraces_id: this._sousraces_id,
