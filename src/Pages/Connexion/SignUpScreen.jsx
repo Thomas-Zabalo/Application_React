@@ -1,29 +1,96 @@
 import React, { useState } from 'react';
-import { Button, TextField, Link, Grid, Box, Typography, Container, CssBaseline } from '@mui/material';
+import {
+    Button, TextField, Link, Grid, Box, Typography, Container, CssBaseline, Snackbar, IconButton
+} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import VpnKeyRoundedIcon from '@mui/icons-material/VpnKeyRounded';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 import Sidebar from '../../components/Nav/Sidebar';
+import CloseIcon from '@mui/icons-material/Close';
 
 const defaultTheme = createTheme();
 
 export default function SignUpScreen() {
+    const url = `https://zabalo.alwaysdata.net/sae401/api/users`;
+
+    const [nom, setNom] = useState("");
     const [password, setPassword] = useState("");
     const [passVisi, setPassVisi] = useState(true);
     const [email, setEmail] = useState("");
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState("");
 
+
+    const handleNomChange = (event) => setNom(event.target.value);
     const handleEmailChange = (event) => setEmail(event.target.value);
     const handlePassChange = (event) => setPassword(event.target.value);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        if (email !== '' && password !== '' && nom !== '') {
+            const userData = {
+                name: nom,
+                email: email,
+                password: password
+            };
+            getUtilisateur(userData);
+        } else {
+            setSnackbarMessage('Veuillez remplir tous les champs.');
+            setOpenSnackbar(true);
+            const timer = setTimeout(() => {
+                setOpenSnackbar(false);
+            }, 5000);
+            return () => clearTimeout(timer);
+        }
+    };
+
+    function getUtilisateur(userData) {
+        const fetchOptions = {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData)
+        };
+
+        fetch(url, fetchOptions)
+            .then((response) => {
+                console.log(response)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                if (data.status === 'success') {
+                    window.location.href = '/Login';
+                } else {
+                    setSnackbarMessage("Erreur lors de la création du compte !");
+                    setOpenSnackbar(true);
+                    const timer = setTimeout(() => {
+                        setOpenSnackbar(false);
+                    }, 5000);
+                    return () => clearTimeout(timer);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                setSnackbarMessage(error.message || "Erreur lors de la connexion au serveur !");
+                setOpenSnackbar(true);
+                const timer = setTimeout(() => {
+                    setOpenSnackbar(false);
+                }, 5000);
+                return () => clearTimeout(timer);
+            });
+    }
+
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenSnackbar(false);
     };
 
     return (
@@ -49,13 +116,14 @@ export default function SignUpScreen() {
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <TextField
-                                    autoComplete="given-name"
-                                    name="firstName"
                                     required
                                     fullWidth
-                                    id="firstName"
-                                    label="Pseudo"
-                                    autoFocus
+                                    id="nom"
+                                    label="Nom d'utilisateur"
+                                    name="nom"
+                                    autoComplete="nom"
+                                    value={nom}
+                                    onChange={handleNomChange}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -102,17 +170,28 @@ export default function SignUpScreen() {
                         <Grid container>
                             <Grid item xs>
                                 <Typography>
-                                    Vous avez déjà un compte ?
+                                    Vous avez déjà un compte?
                                 </Typography>
                             </Grid>
                             <Grid item>
                                 <Link href="Login" variant="body2">
-                                    {"Connectez vous !"}
+                                    {"Connectez-vous !"}
                                 </Link>
                             </Grid>
                         </Grid>
                     </Box>
                 </Box>
+                <Snackbar
+                    open={openSnackbar}
+                    autoHideDuration={6000}
+                    onClose={handleCloseSnackbar}
+                    message={snackbarMessage}
+                    action={
+                        <IconButton size="small" aria-label="close" color="inherit" onClick={handleCloseSnackbar}>
+                            <CloseIcon fontSize="small" />
+                        </IconButton>
+                    }
+                />
             </Container>
         </ThemeProvider>
     );
