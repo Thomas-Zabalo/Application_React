@@ -14,39 +14,41 @@ function Detail() {
 
     const { idPerso } = useParams();
     const [dPerso, setdPerso] = useState(null);
+    const url = `https://zabalo.alwaysdata.net/sae401/api/personnages/${idPerso}`
 
     useEffect(() => {
-        const fetchPersoDetail = () => {
-            fetch(
-                `https://zabalo.alwaysdata.net/sae401/api/personnages/${idPerso}`
-            )
-                .then((response) => {
-                    return response.json();
-                })
-                .then((dataJSON) => {
-                    let personnage = new Personnage(
-                        dataJSON.sousraces_id,
-                        dataJSON.origines_id,
-                        dataJSON.sousclasses_id,
-                        dataJSON.users_id,
-                        dataJSON.nom,
-                        dataJSON.id,
-                        dataJSON.user,
-                        dataJSON.sousclasses,
-                        dataJSON.sousraces,
-                        dataJSON.origines
-                    );
-                    console.log(dataJSON)
-                    console.log(personnage)
-                    setdPerso(personnage);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        };
-
-        fetchPersoDetail();
+        PersoDetail();
     }, [idPerso]);
+
+    function PersoDetail(url) {
+        const fetchOptions = {
+            method: "GET",
+        }
+        fetch(url, fetchOptions)
+            .then((response) => {
+                return response.json();
+            })
+            .then((dataJSON) => {
+                let personnage = new Personnage(
+                    dataJSON.sousraces_id,
+                    dataJSON.origines_id,
+                    dataJSON.sousclasses_id,
+                    dataJSON.users_id,
+                    dataJSON.nom,
+                    dataJSON.id,
+                    dataJSON.user,
+                    dataJSON.sousclasses,
+                    dataJSON.sousraces,
+                    dataJSON.origines
+                );
+                console.log(dataJSON)
+                console.log(personnage)
+                setdPerso(personnage);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
 
     return (
         <Box sx={{ display: 'flex' }}>
