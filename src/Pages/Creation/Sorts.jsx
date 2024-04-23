@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Grid, Card, CardContent, CardActions, Typography, Button, CardMedia, Box } from '@mui/material';
 import Sidebar from "../../components/Nav/Sidebar";
 
-function Creation() {
+function Sort() {
     const [Sorts, setSorts] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
     const [selectedSort, setSelectedSort] = useState(null);
@@ -95,4 +95,4 @@ function Creation() {
     );
 }
 
-export default Creation;
+export default Sort;

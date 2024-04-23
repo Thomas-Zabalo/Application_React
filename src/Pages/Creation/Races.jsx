@@ -32,7 +32,7 @@ function Race() {
     return (
         <Box sx={{ display: 'flex' }}>
             <Sidebar />
-            <Box sx={{ flexGrow: 1, overflow: "auto", backgroundColor: '#f4f6f8', display: 'flex' }}>
+            <Box sx={{ flexGrow: 1, overflow: "auto", display: 'flex' }}>
                 <Grid container spacing={2} sx={{ padding: 3 }}>
 
                     <Grid item xs={12} sm={6} sx={{ display: 'flex', flexDirection: 'column', }}>

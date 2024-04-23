@@ -11,6 +11,10 @@ import Race from './Pages/Creation/Races';
 import SousRace from './Pages/Creation/SousRaces';
 import ProtectedRoute from './components/Protected';
 import Admin from './Pages/Admin/AdminScreen';
+import Classe from './Pages/Creation/Classes';
+import SousClasse from './Pages/Creation/SousClasses';
+import Origine from './Pages/Creation/Origines';
+import Creation from './Pages/Creation/Creation';
 
 export default function App() {
 
@@ -22,21 +26,47 @@ export default function App() {
           <Route path="/SignUp" element={<SignUpScreen />} />
           <Route path="/Login" element={<LoginScreen />} />
           <Route path="/Liste" element={<Liste />} />
-  
+
           <Route path="/Admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
           <Route path="/Detail/:idPerso" element={<Detail />} />
+
           <Route path="/Profil" element={
             <ProtectedRoute>
               <ProfilScreen />
             </ProtectedRoute>
           } />
+
           <Route path="/Nouveau" element={
             <ProtectedRoute>
               <Race />
             </ProtectedRoute>} />
-          <Route path="/SousRace" element={<ProtectedRoute>
+
+          <Route path="/SousRace" element={
+          <ProtectedRoute>
             <SousRace />
           </ProtectedRoute>} />
+
+          <Route path="/Classe" element={
+          <ProtectedRoute>
+            <Classe />
+          </ProtectedRoute>} />
+
+          <Route path="/Sousclasse" element={
+          <ProtectedRoute>
+            <SousClasse />
+          </ProtectedRoute>} />
+          
+          <Route path="/Origine" element={
+          <ProtectedRoute>
+            <Origine />
+          </ProtectedRoute>} />
+
+          <Route path="/Creation" element={
+          <ProtectedRoute>
+            <Creation />
+          </ProtectedRoute>} />
+
+
         </Routes>
       </div>
     </Router>
