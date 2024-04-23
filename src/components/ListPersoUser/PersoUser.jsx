@@ -53,7 +53,8 @@ function PersoUser() {
                             </CardContent>
                             <CardActions>
                                 <Button variant="contained" component={Link} to={"/detail/" + item.id}>Details</Button>
-                                {/* <Button variant="contained" component={Link} to={"/modifier/" + item.id}>Modifier</Button> */}
+                                <Button variant="contained" component={Link} to={"/modifier/" + item.id}>Modifier</Button>
+                                <Button variant="contained" sx={{backgroundColor:"red"}} component={Link} to={"/modifier/" + item.id}>Supprimer</Button>
                             </CardActions>
                         </Card>
                     </Grid>

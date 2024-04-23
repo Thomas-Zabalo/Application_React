@@ -97,7 +97,7 @@ function Race() {
                         <Button
                             variant="contained"
                             sx={{ backgroundColor: "#D0BCFF", borderRadius: 20, padding: "8px 24px" }}
-                            onClick={() => navigate('/sousrace', { state: { raceId: selectedItem } })}
+                            onClick={() => navigate('/sousrace', { state: { raceid: selectedItem } })}
                         >
                             Suivant
                         </Button>

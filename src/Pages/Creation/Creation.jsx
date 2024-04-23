@@ -5,57 +5,67 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from "@mui/material/Typography";
 import Dashboard from "../../components/CreaCard";
+import Button from "@mui/material/Button";
 import Personnage from "../../models/PersonnageController";
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function Creation() {
+    const navigate = useNavigate();
     const location = useLocation();
-    console.log(location)
 
-    const { idPerso } = useParams();
-    const [dPerso, setdPerso] = useState(null);
+    // console.log(location)
+    const [Perso, setPerso] = useState(null);
+    const nom = location.state ? location.state.nom : null;
+
 
     useEffect(() => {
-        const fetchPersoDetail = () => {
-            fetch(
-                `https://zabalo.alwaysdata.net/sae401/api/personnages/4`
-            )
-                .then((response) => {
-                    return response.json();
-                })
-                .then((dataJSON) => {
-                    let personnage = new Personnage(
-                        dataJSON.sousraces_id,
-                        dataJSON.origines_id,
-                        dataJSON.sousclasses_id,
-                        dataJSON.users_id,
-                        dataJSON.nom,
-                        dataJSON.id,
-                        dataJSON.user,
-                        dataJSON.sousclasses,
-                        dataJSON.sousraces,
-                        dataJSON.origines
-                    );
-                    console.log(dataJSON)
-                    console.log(personnage)
-                    setdPerso(personnage);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        };
+        const url = `https://zabalo.alwaysdata.net/sae401/api/personnages?nom=${nom}`;
+        PersoDetail(url);
+    }, []);
 
-        fetchPersoDetail();
-    }, [idPerso]);
+    function PersoDetail(url) {
+        const fetchOptions = {
+            method: "GET",
+        }
+        fetch(url, fetchOptions)
+            .then((response) => {
+                return response.json();
+            })
+            .then((dataJSON) => {
+                console.log(dataJSON)
+                setPerso(dataJSON[0]);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+    console.log(Perso)
+
+
 
     return (
         <Box sx={{ display: 'flex' }}>
             <Sidebar />
             <Container>
                 <div>
-                    {dPerso && (
+
+                    {Perso && (
                         <>
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    borderRadius: 20,
+
+                                    fontSize: 10,
+                                    p: 0.5
+                                }}
+                                onClick={() => navigate('/')}
+                            >
+                                Accueil
+                            </Button>
                             <Typography
                                 variant="h1"
                                 sx={{
@@ -66,10 +76,10 @@ function Creation() {
                                     fontSize: 'clamp(1rem,3vw, 4rem)',
                                 }}
                             >
-                                <h3>Personnage de {dPerso.user.name}</h3>
+                                <h3>Personnage de {Perso.user.name}</h3>
                             </Typography>
-                            <h2>{dPerso.nom}</h2>
-                            <Dashboard dPerso={dPerso} />
+                            <h2>{Perso.nom}</h2>
+                            <Dashboard Perso={Perso} />
                         </>
                     )}
                 </div>

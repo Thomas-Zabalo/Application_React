@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Card, CardContent, CardActions, Typography, Button, IconButton, CardMedia, Box, Snackbar } from '@mui/material';
+import { Grid, Card, CardContent, CardActions, Typography, Button, IconButton, CardMedia, Box, Snackbar, TextField } from '@mui/material';
 import Sidebar from "../../components/Nav/Sidebar";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 
+
 function Origine() {
     const navigate = useNavigate();
     const location = useLocation();
+
+    const [name, setName] = useState('');
+    const handleNomChange = (event) => setName(event.target.value);
 
     const [Origines, setOrigines] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -15,8 +19,7 @@ function Origine() {
 
     const sousraceid = location.state ? location.state.sousraceid : null;
     const sousclasseid = location.state ? location.state.sousclasseid : null;
-    const raceid = location.state ? location.state.raceid : null;
-    const classeid = location.state ? location.state.classeid : null;
+
 
     const url = "https://zabalo.alwaysdata.net/sae401/api/origines";
 
@@ -37,6 +40,37 @@ function Origine() {
         const selected = Origines.find(Origine => Origine.id === itemId);
         setSelectedOrigine(selected);
     };
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const userId = localStorage.getItem('userData');
+        const accessToken = localStorage.getItem('userToken');
+        if (name !== '') {
+            const persoData = {
+                sousraces_id: sousraceid,
+                sousclasses_id: sousclasseid,
+                origines_id: selectedItem,
+                user_id: userId,
+                nom: name
+            };
+            let newUrl = "https://zabalo.alwaysdata.net/sae401/api/personnages"
+            AddPerso(newUrl, persoData, accessToken);
+            navigate('/creation', { state: { nom: name }})
+        }
+    };
+
+    function AddPerso(newUrl, persoData, accessToken) {
+        const fetchOptions = {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(persoData)
+        };
+        fetch(newUrl, fetchOptions)
+    }
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -96,7 +130,19 @@ function Origine() {
                                 </Box>
                             )}
                         </Card>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="nom"
+                            label="Nom d'utilisateur"
+                            name="nom"
+                            value={name}
+                            onChange={handleNomChange}
+                        />
                     </Grid>
+
+
 
                 </Grid>
             </Box>
@@ -105,12 +151,13 @@ function Origine() {
                     <Button
                         variant="contained"
                         sx={{ backgroundColor: "#D0BCFF", borderRadius: 20, padding: "8px 24px" }}
-                        onClick={() => navigate('/creation', { state: { raceId: raceid, sousraceid: sousraceid, classeid: classeid, sousclasseid: sousclasseid, origineid: selectedItem } })}>
+                        onClick={handleSubmit}>
                         Suivant
                     </Button>
                 </Box>
-            )}
-        </Box>
+            )
+            }
+        </Box >
     );
 }
 

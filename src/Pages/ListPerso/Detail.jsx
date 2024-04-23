@@ -29,6 +29,7 @@ function Detail() {
                 return response.json();
             })
             .then((dataJSON) => {
+                console.log(dataJSON)
                 let personnage = new Personnage(
                     dataJSON.sousraces_id,
                     dataJSON.origines_id,
