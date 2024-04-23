@@ -14,10 +14,10 @@ function Detail() {
 
     const { idPerso } = useParams();
     const [dPerso, setdPerso] = useState(null);
-    const url = `https://zabalo.alwaysdata.net/sae401/api/personnages/${idPerso}`
 
     useEffect(() => {
-        PersoDetail();
+        const url = `https://zabalo.alwaysdata.net/sae401/api/personnages/${idPerso}`
+        PersoDetail(url);
     }, [idPerso]);
 
     function PersoDetail(url) {

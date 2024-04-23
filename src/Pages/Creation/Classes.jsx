@@ -9,10 +9,9 @@ function Classe() {
     const navigate = useNavigate();
 
     const location = useLocation();
-    // const { sousraceid } = location.state
-    console.log(location)
 
     const sousraceid = location.state ? location.state.sousraceid : null;
+    const raceid = location.state ? location.state.raceid : null;
 
     const [Classes, setClasses] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -128,7 +127,7 @@ function Classe() {
                         <Button
                             variant="contained"
                             sx={{ backgroundColor: "#D0BCFF", borderRadius: 20, padding: "8px 24px" }}
-                            onClick={() => navigate('/sousclasse', { state: { sousraceid: sousraceid, classeid: selectedItem } })}
+                            onClick={() => navigate('/sousclasse', { state: { raceid: raceid, sousraceid: sousraceid, classeid: selectedItem } })}
                         >
                             Suivant
                         </Button>

@@ -8,7 +8,6 @@ import CloseIcon from '@mui/icons-material/Close';
 function Origine() {
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location)
 
     const [Origines, setOrigines] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -16,6 +15,8 @@ function Origine() {
 
     const sousraceid = location.state ? location.state.sousraceid : null;
     const sousclasseid = location.state ? location.state.sousclasseid : null;
+    const raceid = location.state ? location.state.raceid : null;
+    const classeid = location.state ? location.state.classeid : null;
 
     const url = "https://zabalo.alwaysdata.net/sae401/api/origines";
 
@@ -104,7 +105,7 @@ function Origine() {
                     <Button
                         variant="contained"
                         sx={{ backgroundColor: "#D0BCFF", borderRadius: 20, padding: "8px 24px" }}
-                        onClick={() => navigate('/creation', { state: { sousraceid: sousraceid, sousclasseid: sousclasseid, origineid: selectedItem } })}>
+                        onClick={() => navigate('/creation', { state: { raceId: raceid, sousraceid: sousraceid, classeid: classeid, sousclasseid: sousclasseid, origineid: selectedItem } })}>
                         Suivant
                     </Button>
                 </Box>

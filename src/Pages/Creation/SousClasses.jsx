@@ -9,8 +9,6 @@ function SousClasse() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    console.log(location)
-
     const [SousClasses, setSousClasses] = useState([]);
 
     const [selectedItem, setSelectedItem] = useState(null);
@@ -20,6 +18,7 @@ function SousClasse() {
 
     const sousraceid = location.state ? location.state.sousraceid : null;
     const classeid = location.state ? location.state.classeid : null;
+    const raceid = location.state ? location.state.raceid : null;
 
 
     const url = `https://zabalo.alwaysdata.net/sae401/api/classes/${classeid}`;
@@ -68,7 +67,7 @@ function SousClasse() {
         setSelectedSousClasse(selected);
     };
 
-    const handleCloseSnackbar = ( reason) => {
+    const handleCloseSnackbar = (reason) => {
         if (reason === 'clickaway') {
             return;
         }
@@ -143,7 +142,7 @@ function SousClasse() {
                     <Button
                         variant="contained"
                         sx={{ backgroundColor: "#D0BCFF", borderRadius: 20, padding: "8px 24px" }}
-                        onClick={() => navigate('/origine', { state: { sousraceid: sousraceid, sousclasseid: selectedItem } })}
+                        onClick={() => navigate('/origine', { state: { raceid: raceid, sousraceid: sousraceid, classeid: classeid, sousclasseid: selectedItem } })}
                     >
                         Suivant
                     </Button>

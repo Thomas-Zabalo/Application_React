@@ -9,8 +9,6 @@ function SousRace() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    console.log(location)
-
     const [sousRaces, setSousRaces] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
     const [selectedSousRace, setSelectedSousRace] = useState(null);
@@ -18,13 +16,13 @@ function SousRace() {
     const [snackbarMessage, setSnackbarMessage] = useState("");
 
     // // Extract raceId from location state
-    const raceId = location.state ? location.state.raceId : null;
+    const raceid = location.state ? location.state.raceid : null;
 
     // Construct the API URL with the raceId
-    const url = `https://zabalo.alwaysdata.net/sae401/api/races/${raceId}`;
+    const url = `https://zabalo.alwaysdata.net/sae401/api/races/${raceid}`;
 
     useEffect(() => {
-        if (raceId) {
+        if (raceid) {
             getSousRaces();
         } else {
             setSnackbarMessage("Veuillez selectionner une race !");
@@ -130,7 +128,7 @@ function SousRace() {
                     <Button
                         variant="contained"
                         sx={{ backgroundColor: "#D0BCFF", borderRadius: 20, padding: "8px 24px" }}
-                        onClick={() => navigate('/classe', { state: { sousraceid: selectedItem } })}
+                        onClick={() => navigate('/classe', { state: { raceid: raceid, sousraceid: selectedItem } })}
                     >
                         Suivant
                     </Button>
