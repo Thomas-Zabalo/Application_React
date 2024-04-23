@@ -22,15 +22,20 @@ export default function App() {
           <Route path="/SignUp" element={<SignUpScreen />} />
           <Route path="/Login" element={<LoginScreen />} />
           <Route path="/Liste" element={<Liste />} />
-          <Route path="/Admin" element={<Admin />} /> 
+          <Route path="/Admin" element={<Admin />} />
           <Route path="/Detail/:idPerso" element={<Detail />} />
           <Route path="/Profil" element={
             <ProtectedRoute>
               <ProfilScreen />
             </ProtectedRoute>
           } />
-          <Route path="/Nouveau" element={<Race />} />
-          <Route path="/SousRace" element={<SousRace />} />
+          <Route path="/Nouveau" element={
+            <ProtectedRoute>
+              <Race />
+            </ProtectedRoute>} />
+          <Route path="/SousRace" element={<ProtectedRoute>
+            <SousRace />
+          </ProtectedRoute>} />
         </Routes>
       </div>
     </Router>
