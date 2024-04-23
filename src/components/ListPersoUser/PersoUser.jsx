@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardActions, Button, Typography, Grid, Box } from "@mui/material";
 import Personnage from "../../models/PersonnageController";
+import CheckIcon from '@mui/icons-material/Check';
+import Alert from '@mui/material/Alert';
+import { useLocation } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
 function PersoUser() {
     const [lPerso, setLPerso] = useState([]);
-
+    const location = useLocation();
     useEffect(() => {
         const accessToken = localStorage.getItem('userToken');
         const userId = localStorage.getItem('userData');
@@ -40,6 +43,40 @@ function PersoUser() {
             });
     }
 
+    const handleSuppression = (id) => {
+        if (window.confirm("Êtes-vous sûr de vouloir supprimer ce personnage ?")) {
+            console.log("cooncon")
+            supprimerPersonnage(id)
+        }
+        // supprimerPersonnage(id)
+    };
+
+    function supprimerPersonnage(id) {
+        const accessToken = localStorage.getItem('userToken');
+        const url = `https://zabalo.alwaysdata.net/sae401/api/personnages/${id}`;
+
+        const fetchOptions = {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        };
+        fetch(url, fetchOptions)
+            .then((response) => {
+                return response.json();
+            })
+            .then(dataJSON => {
+                console.log(dataJSON)
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+
+
+
     return (
         <Box sx={{ flex: 1, paddingTop: 4 }}>
             <Grid container spacing={4}>
@@ -53,8 +90,19 @@ function PersoUser() {
                             </CardContent>
                             <CardActions>
                                 <Button variant="contained" component={Link} to={"/detail/" + item.id}>Details</Button>
-                                <Button variant="contained" component={Link} to={"/modifier/" + item.id}>Modifier</Button>
-                                <Button variant="contained" sx={{backgroundColor:"red"}} component={Link} to={"/modifier/" + item.id}>Supprimer</Button>
+                                <Button variant="contained" sx={{
+                                    backgroundColor: 'orange', // Use the theme's error color
+                                    '&:hover': {
+                                        backgroundColor: '#e65100' // Use a darker version of the error color on hover
+                                    }
+                                }} component={Link} to={"/modifier/" + item.id}>Modifier</Button>
+
+                                <Button variant="contained" sx={{
+                                    backgroundColor: 'error.main', // Use the theme's error color
+                                    '&:hover': {
+                                        backgroundColor: 'error.dark' // Use a darker version of the error color on hover
+                                    }
+                                }} onClick={() => handleSuppression(item.id)}>Supprimer</Button>
                             </CardActions>
                         </Card>
                     </Grid>
