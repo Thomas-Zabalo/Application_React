@@ -18,7 +18,7 @@ export default function App() {
       <div className="d-flex">
         <Routes>
           <Route path="/" element={<HomeScreen />} />
-          <Route path="/SignIn" element={<SignUpScreen />} />
+          <Route path="/SignUp" element={<SignUpScreen />} />
           <Route path="/Login" element={<LoginScreen />} />
           <Route path="/Liste" element={<Liste />} />
           <Route path="/Detail/:idPerso" element={<Detail />} />
