@@ -138,7 +138,7 @@ export default function LoginScreen() {
                                     </Typography>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="SignIn" variant="body2">
+                                    <Link href="SignUp" variant="body2">
                                         {"Créez un compte !"}
                                     </Link>
                                 </Grid>
