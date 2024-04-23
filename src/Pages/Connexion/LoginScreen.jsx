@@ -34,17 +34,15 @@ export default function LoginScreen() {
 
     const handleLogin = (event) => {
         event.preventDefault();
-        console.log("Login attempt");  // Vérifiez si cela s'imprime lorsque vous essayez de vous connecter.
         if (email !== '' && password !== '') {
             const userData = {
                 email: email,
                 password: password
             };
-            console.log("Sending data", userData);  // Vérifiez les données qui seront envoyées.
             loginUser(userData);
         }
     };
-    
+
 
 
     function loginUser(userData) {
@@ -58,16 +56,14 @@ export default function LoginScreen() {
 
         fetch(url, fetchOptions)
             .then((response) => {
-                console.log(response);
                 if (!response.ok) {
-                    throw new Error('Erreur lors de la création du compte');
+                    throw new Error('Erreur lors de la connexion');
                 }
                 return response.json();
             })
             .then((dataJSON) => {
-                console.log(dataJSON);
-                login(dataJSON.accessToken, dataJSON.user_id);
-                navigate('/Profil'); 
+                login(dataJSON.accessToken.substring(3), dataJSON.user_id, dataJSON.admin);
+                navigate('/Profil');
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -77,8 +73,8 @@ export default function LoginScreen() {
     useEffect(() => {
         const token = localStorage.getItem('userToken');
         const id = localStorage.getItem('userData');
-        // console.log(token);
-        // console.log(id);
+        const admin = localStorage.getItem('userAdmin');
+
     }, []);
 
     return (
@@ -103,7 +99,7 @@ export default function LoginScreen() {
                         <Typography component="h1" variant="h5">
                             Connexion
                         </Typography>
-                        <Box component="form"  noValidate sx={{ mt: 1 }}>
+                        <Box component="form" noValidate sx={{ mt: 1 }}>
                             <TextField
                                 margin="normal"
                                 required
@@ -144,7 +140,7 @@ export default function LoginScreen() {
                                 href="Profil">
                                 Se connecter
                             </Button>
-                            
+
                             <Grid container>
                                 <Grid item xs>
                                     <Typography>
