@@ -9,12 +9,15 @@ import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
 import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 import Sidebar from '../../components/Nav/Sidebar';
 import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from 'react-router-dom';
+
 
 const defaultTheme = createTheme();
 
 export default function SignUpScreen() {
     const url = `https://zabalo.alwaysdata.net/sae401/api/users`;
 
+    const navigate = useNavigate();
     const [nom, setNom] = useState("");
     const [password, setPassword] = useState("");
     const [passVisi, setPassVisi] = useState(true);
@@ -35,6 +38,7 @@ export default function SignUpScreen() {
                 email: email,
                 password: password
             };
+            console.log(userData)
             getUtilisateur(userData);
         } else {
             setSnackbarMessage('Veuillez remplir tous les champs.');
@@ -57,34 +61,27 @@ export default function SignUpScreen() {
 
         fetch(url, fetchOptions)
             .then((response) => {
-                console.log(response)
                 if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
+                    throw new Error('Erreur lors de la création du compte');  // Lance une exception si le statut HTTP n'est pas ok
                 }
-                return response.json();
+                return response.json();  // Continue avec la transformation en JSON si tout est ok
             })
-            .then((data) => {
-                if (data.status === 'success') {
-                    window.location.href = '/Login';
-                } else {
-                    setSnackbarMessage("Erreur lors de la création du compte !");
-                    setOpenSnackbar(true);
-                    const timer = setTimeout(() => {
-                        setOpenSnackbar(false);
-                    }, 5000);
-                    return () => clearTimeout(timer);
-                }
+            .then((dataJSON) => {
+                console.log(dataJSON);
+                setSnackbarMessage("Compte créé avec succès !");
+                setOpenSnackbar(true);
+                setTimeout(() => {
+                    navigate('/Login'); 
+                }, 3000);
             })
             .catch((error) => {
                 console.error('Error:', error);
-                setSnackbarMessage(error.message || "Erreur lors de la connexion au serveur !");
+                setSnackbarMessage(error.message);
                 setOpenSnackbar(true);
-                const timer = setTimeout(() => {
-                    setOpenSnackbar(false);
-                }, 5000);
-                return () => clearTimeout(timer);
             });
     }
+
+
 
     const handleCloseSnackbar = (event, reason) => {
         if (reason === 'clickaway') {
