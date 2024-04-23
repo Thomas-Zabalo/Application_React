@@ -5,10 +5,22 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { useAuth } from '../../components/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function TextHome() {
-    const { userToken } = useAuth();
+    const navigate = useNavigate();
+    const userToken = localStorage.getItem('userToken');
+
+    const handleButtonClick = () => {
+        if (userToken) {
+            // Si l'utilisateur est connecté, naviguez vers la page pour créer un personnage
+            navigate('/Nouveau');
+        } else {
+            // Sinon, redirigez l'utilisateur vers la page de connexion
+            navigate('/Login');
+        }
+    };
+
     return (
         <Box>
             <Container
@@ -61,11 +73,11 @@ export default function TextHome() {
                     useFlexGap
                     sx={{ pt: 2, width: { xs: '100%', sm: 'auto' } }}
                 >
-                    {userToken && (
-                        <Button variant="contained" href="/Nouveau" style={{ top: 0, right: 0, margin: 4 }}>
-                            Créez mon personnage
-                        </Button>
-                    )}
+
+                    <Button variant="contained" onClick={handleButtonClick} style={{ top: 0, right: 0, margin: 4 }}>
+                        Créez mon personnage
+                    </Button>
+
                 </Stack>
             </Container>
         </Box>
