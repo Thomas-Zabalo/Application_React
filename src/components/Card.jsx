@@ -10,9 +10,9 @@ const StyledCard = styled(Card)(({ theme }) => ({
 
 const CardStats = ({ icon, category, title, description }) => {
     return (
-        <Grid item xs={12} sm={6} md={3}>
-            <StyledCard>
-                <CardContent sx={{ flex: '1 0 auto', display: 'flex', alignItems: 'center' }}>
+        <Grid item xs={12} sm={6} md={3} sx={{ display: 'flex' }}>
+            <StyledCard sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+                <CardContent sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
                     <Box sx={{ color: 'warning.main', p: 2, textAlign: 'center' }}>
                         <Avatar src={icon} sx={{ backgroundColor: "black" }} />
                     </Box>
@@ -34,27 +34,41 @@ const CardStats = ({ icon, category, title, description }) => {
     );
 };
 
-function Dashboard(lPerso) {
-    console.log(lPerso.lPerso)
+function Dashboard(dPerso) {
+    console.log(dPerso.dPerso)
     return (
-        <Grid container spacing={2} sx={{ p: 2, justifyContent: 'center', alignItems: 'center' }}>
+        <Grid container spacing={2} sx={{ p: 2, justifyContent: 'center', alignItems: 'stretch' }}>
             <CardStats
-                icon={lPerso.lPerso.sousraces.races.icone}
+                icon={dPerso.dPerso.sousraces.races.icone}
                 category="Race"
-                title={lPerso.lPerso.sousraces.races.nom}
-                description={lPerso.lPerso.sousraces.races.description}
+                title={dPerso.dPerso.sousraces.races.nom}
+                description={dPerso.dPerso.sousraces.races.description}
             />
+            {dPerso.dPerso.sousraces.races.nom !== dPerso.dPerso.sousraces.races.icone && (
+                <CardStats
+                    icon={dPerso.dPerso.sousraces.icone}
+                    category="Sous Race"
+                    title={dPerso.dPerso.sousraces.nom}
+                    description={dPerso.dPerso.sousraces.description}
+                />
+            )}
             <CardStats
-                icon={lPerso.lPerso.sousclasses.classes.icone}
+                icon={dPerso.dPerso.sousclasses.classes.icone}
                 category="Classe"
-                title={lPerso.lPerso.sousclasses.classes.nom}
-                description={lPerso.lPerso.sousraces.races.description}
+                title={dPerso.dPerso.sousclasses.classes.nom}
+                description={dPerso.dPerso.sousclasses.classes.description}
             />
             <CardStats
-                icon={lPerso.lPerso.origines.icone}
+                icon={dPerso.dPerso.sousclasses.icone}
+                category="Sous Classe"
+                title={dPerso.dPerso.sousclasses.nom}
+                description={dPerso.dPerso.sousclasses.description}
+            />
+            <CardStats
+                icon={dPerso.dPerso.origines.icone}
                 category="Origine"
-                title={lPerso.lPerso.origines.nom}
-                description={lPerso.lPerso.sousraces.races.description}
+                title={dPerso.dPerso.origines.nom}
+                description={dPerso.dPerso.origines.description}
             />
         </Grid>
     );
