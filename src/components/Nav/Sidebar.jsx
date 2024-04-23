@@ -82,14 +82,18 @@ function Sidebar() {
                                 <ListItemText primary="Liste" />
                             </ListItemButton>
                         </ListItem>
-                        <ListItem disablePadding component={Link} to="/Nouveau" sx={{ color: 'black' }}>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <AddCircleIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Nouveau" />
-                            </ListItemButton>
-                        </ListItem>
+                        
+                        {userToken && (
+                            <ListItem disablePadding component={Link} to="/Nouveau" sx={{ color: 'black' }}>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <AddCircleIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Nouveau" />
+                                </ListItemButton>
+                            </ListItem>
+                        )}
+
                         <ListItem disablePadding component={Link} to="/Profil" sx={{ color: 'black' }}>
                             <ListItemButton>
                                 <ListItemIcon>
