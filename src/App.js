@@ -10,6 +10,7 @@ import ProfilScreen from './Pages/Profil/ProfilScreen';
 import Race from './Pages/Creation/Races';
 import SousRace from './Pages/Creation/SousRaces';
 import ProtectedRoute from './components/Protected';
+import Admin from './Pages/Admin/AdminScreen';
 
 export default function App() {
 
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/SignUp" element={<SignUpScreen />} />
           <Route path="/Login" element={<LoginScreen />} />
           <Route path="/Liste" element={<Liste />} />
+          <Route path="/Admin" element={<Admin />} /> 
           <Route path="/Detail/:idPerso" element={<Detail />} />
           <Route path="/Profil" element={
             <ProtectedRoute>
