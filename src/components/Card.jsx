@@ -1,7 +1,6 @@
 import React from 'react';
-import { Grid, Card, CardContent, CardActions, Typography, Divider, Box } from '@mui/material';
+import { Grid, Card, CardContent, Typography, Box, Avatar, Divider, CardActions } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Icon from '@mui/material/Icon';
 
 const StyledCard = styled(Card)(({ theme }) => ({
     height: '100%',
@@ -9,16 +8,16 @@ const StyledCard = styled(Card)(({ theme }) => ({
     flexDirection: 'column',
 }));
 
-const CardStats = ({ icon, category, title, footerIcon, footerText }) => {
+const CardStats = ({ icon, category, title, description }) => {
     return (
         <Grid item xs={12} sm={6} md={3}>
             <StyledCard>
                 <CardContent sx={{ flex: '1 0 auto', display: 'flex', alignItems: 'center' }}>
                     <Box sx={{ color: 'warning.main', p: 2, textAlign: 'center' }}>
-                        <Icon>{icon}</Icon>
+                        <Avatar src={icon} sx={{ backgroundColor: "black" }} />
                     </Box>
                     <div>
-                        <Typography variant="subtitle1" color="textSecondary">
+                        <Typography variant="subtitle2" color="textSecondary">
                             {category}
                         </Typography>
                         <Typography variant="h5">{title}</Typography>
@@ -26,9 +25,8 @@ const CardStats = ({ icon, category, title, footerIcon, footerText }) => {
                 </CardContent>
                 <Divider />
                 <CardActions sx={{ justifyContent: 'flex-end' }}>
-                    <Icon>{footerIcon}</Icon>
                     <Typography variant="subtitle2">
-                        {footerText}
+                        {description}
                     </Typography>
                 </CardActions>
             </StyledCard>
@@ -36,36 +34,27 @@ const CardStats = ({ icon, category, title, footerIcon, footerText }) => {
     );
 };
 
-function Dashboard() {
+function Dashboard(lPerso) {
+    console.log(lPerso.lPerso)
     return (
-        <Grid container spacing={2} sx={{ p: 2 }}>
+        <Grid container spacing={2} sx={{ p: 2, justifyContent: 'center', alignItems: 'center' }}>
             <CardStats
-                icon="nc-icon nc-globe"
-                category="Capacity"
-                title="150GB"
-                footerIcon="fas fa-sync-alt"
-                footerText="Update Now"
+                icon={lPerso.lPerso.sousraces.races.icone}
+                category="Race"
+                title={lPerso.lPerso.sousraces.races.nom}
+                description={lPerso.lPerso.sousraces.races.description}
             />
             <CardStats
-                icon="nc-icon nc-money-coins"
-                category="Revenue"
-                title="$1,345"
-                footerIcon="far fa-calendar"
-                footerText="Last day"
+                icon={lPerso.lPerso.sousclasses.classes.icone}
+                category="Classe"
+                title={lPerso.lPerso.sousclasses.classes.nom}
+                description={lPerso.lPerso.sousraces.races.description}
             />
             <CardStats
-                icon="nc-icon nc-vector"
-                category="Errors"
-                title="23"
-                footerIcon="far fa-clock"
-                footerText="In the last hour"
-            />
-            <CardStats
-                icon="nc-icon nc-favourite-28"
-                category="Followers"
-                title="+45K"
-                footerIcon="fas fa-sync-alt"
-                footerText="Update now"
+                icon={lPerso.lPerso.origines.icone}
+                category="Origine"
+                title={lPerso.lPerso.origines.nom}
+                description={lPerso.lPerso.sousraces.races.description}
             />
         </Grid>
     );
