@@ -5,9 +5,10 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { useAuth } from '../../components/AuthContext';
 
 export default function TextHome() {
-
+    const { userToken } = useAuth();
     return (
         <Box>
             <Container
@@ -60,9 +61,11 @@ export default function TextHome() {
                     useFlexGap
                     sx={{ pt: 2, width: { xs: '100%', sm: 'auto' } }}
                 >
-                    <Button variant="contained" href="/" style={{ top: 0, right: 0, margin: 4 }}>
-                        Créez mon personnage
-                    </Button>
+                    {userToken && (
+                        <Button variant="contained" href="/Nouveau" style={{ top: 0, right: 0, margin: 4 }}>
+                            Créez mon personnage
+                        </Button>
+                    )}
                 </Stack>
             </Container>
         </Box>

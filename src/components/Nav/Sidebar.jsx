@@ -20,9 +20,7 @@ function Sidebar() {
     const url = "https://zabalo.alwaysdata.net/sae401/api/logout";
 
     const accessToken = userToken;
-    // console.log(userToken)
-
-
+  
     function deconnexion() {
 
         const fetchOptions = {
@@ -82,7 +80,7 @@ function Sidebar() {
                                 <ListItemText primary="Liste" />
                             </ListItemButton>
                         </ListItem>
-                        
+
                         {userToken && (
                             <ListItem disablePadding component={Link} to="/Nouveau" sx={{ color: 'black' }}>
                                 <ListItemButton>

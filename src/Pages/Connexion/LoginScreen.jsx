@@ -62,7 +62,13 @@ export default function LoginScreen() {
                 return response.json();
             })
             .then((dataJSON) => {
-                login(dataJSON.accessToken.substring(3), dataJSON.user_id, dataJSON.admin);
+                const accessToken = dataJSON.accessToken;
+                const delimiterIndex = accessToken.indexOf('|');
+
+                if (delimiterIndex !== -1) {
+                    const partAfterDelimiter = accessToken.substring(delimiterIndex + 1);
+                    login(partAfterDelimiter, dataJSON.user_id, dataJSON.admin);
+                }
                 navigate('/Profil');
             })
             .catch((error) => {

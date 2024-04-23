@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
+import Dashboard from "../../components/Card";
 // import List from "@mui/material/List";
 // import ListItemButton from "@mui/material/ListItemButton";
 // import ListItemIcon from "@mui/material/ListItemIcon";
@@ -16,6 +17,8 @@ import Avatar from "@mui/material/Avatar";
 // import StarBorder from "@mui/icons-material/StarBorder";
 // import ExpandLess from "@mui/icons-material/ExpandLess";
 // import ExpandMore from "@mui/icons-material/ExpandMore";
+
+
 
 function Detail() {
 
@@ -49,6 +52,10 @@ function Detail() {
         <Box sx={{ display: 'flex' }}>
             <Sidebar />
             <Container>
+                <Dashboard />
+
+
+
                 <div>
                     {lPerso && (
                         <>
