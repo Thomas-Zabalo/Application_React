@@ -65,9 +65,9 @@ function Detail() {
                                     fontSize: 'clamp(1rem,3vw, 4rem)',
                                 }}
                             >
-                                <h2>Personnage de {dPerso.user.name}</h2>
+                                <h3>Personnage de {dPerso.user.name}</h3>
                             </Typography>
-                            <h2>Personnage de {dPerso.user.name}</h2>
+                            <h2>{dPerso.nom}</h2>
                             <Dashboard dPerso={dPerso} />
                         </>
                     )}
