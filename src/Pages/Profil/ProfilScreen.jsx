@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
+import { Box, Grid, Card, Typography, Container, Avatar, TextField, Button } from '@mui/material';
 import { green } from '@mui/material/colors';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import Sidebar from '../../components/Nav/Sidebar';
 import PersoUser from '../../components/Utilisateur/PersoUser';
+
 
 function ProfilScreen() {
     const [name, setName] = useState('');
