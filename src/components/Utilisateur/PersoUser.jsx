@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardActions, Button, Typography, Grid, Box } from "@mui/material";
 import Personnage from "../../models/PersonnageController";
-import CheckIcon from '@mui/icons-material/Check';
-import Alert from '@mui/material/Alert';
-import { useLocation } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
 function PersoUser() {
+    
     const [lPerso, setLPerso] = useState([]);
-    const location = useLocation();
+
     useEffect(() => {
         const accessToken = localStorage.getItem('userToken');
         const userId = localStorage.getItem('userData');

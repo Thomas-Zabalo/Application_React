@@ -10,7 +10,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Sidebar from '../../components/Nav/Sidebar';
-import PersoUser from '../../components/ListPersoUser/PersoUser';
+import PersoUser from '../../components/Utilisateur/PersoUser';
 
 function ProfilScreen() {
     const [name, setName] = useState('');
