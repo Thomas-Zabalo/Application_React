@@ -1,16 +1,26 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+//Home Screen
 import HomeScreen from './Pages/Home/HomeScreen';
-import SignUpScreen from './Pages/Connexion/SignUpScreen';
-import LoginScreen from './Pages/Connexion/LoginScreen';
 import Liste from './Pages/ListPerso/ListeScreen';
 import Detail from './Pages/ListPerso/Detail';
+
+//Connexion / Inscription Screen
+import SignUpScreen from './Pages/Connexion/SignUpScreen';
+import LoginScreen from './Pages/Connexion/LoginScreen';
+
+//Admin / Route protégé Screen
+import { ProtectedRoute, ProtectedAdmin } from './components/Authentification/Protected';
+import Admin from './Pages/Admin/AdminScreen';
+import Gestion from './Pages/Admin/Gestion';
+
+//Creation Personnage Screen
 import ProfilScreen from './Pages/Profil/ProfilScreen';
+
+//Creation Personnage Screen
 import Race from './Pages/Creation/Races';
 import SousRace from './Pages/Creation/SousRaces';
-import ProtectedRoute from './components/Authentification/Protected';
-import Admin from './Pages/Admin/AdminScreen';
 import Classe from './Pages/Creation/Classes';
 import SousClasse from './Pages/Creation/SousClasses';
 import Origine from './Pages/Creation/Origines';
@@ -27,7 +37,16 @@ export default function App() {
           <Route path="/Login" element={<LoginScreen />} />
           <Route path="/Liste" element={<Liste />} />
 
-          <Route path="/Admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+          <Route path="/Admin" element={
+            <ProtectedAdmin>
+              <Admin />
+            </ProtectedAdmin>} />
+
+          <Route path="/Gestion" element={
+            <ProtectedAdmin>
+              <Gestion />
+            </ProtectedAdmin>} />
+
           <Route path="/Detail/:idPerso" element={<Detail />} />
 
           <Route path="/Profil" element={
@@ -42,29 +61,29 @@ export default function App() {
             </ProtectedRoute>} />
 
           <Route path="/SousRace" element={
-          <ProtectedRoute>
-            <SousRace />
-          </ProtectedRoute>} />
+            <ProtectedRoute>
+              <SousRace />
+            </ProtectedRoute>} />
 
           <Route path="/Classe" element={
-          <ProtectedRoute>
-            <Classe />
-          </ProtectedRoute>} />
+            <ProtectedRoute>
+              <Classe />
+            </ProtectedRoute>} />
 
           <Route path="/Sousclasse" element={
-          <ProtectedRoute>
-            <SousClasse />
-          </ProtectedRoute>} />
-          
+            <ProtectedRoute>
+              <SousClasse />
+            </ProtectedRoute>} />
+
           <Route path="/Origine" element={
-          <ProtectedRoute>
-            <Origine />
-          </ProtectedRoute>} />
+            <ProtectedRoute>
+              <Origine />
+            </ProtectedRoute>} />
 
           <Route path="/Creation" element={
-          <ProtectedRoute>
-            <Creation />
-          </ProtectedRoute>} />
+            <ProtectedRoute>
+              <Creation />
+            </ProtectedRoute>} />
 
 
         </Routes>

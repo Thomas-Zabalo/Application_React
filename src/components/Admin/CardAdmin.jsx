@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Card, CardContent, Typography, Box, Avatar, Divider, CardActions } from '@mui/material';
+import { Grid, Card, CardContent, Typography, Box, Avatar, Divider, CardActions, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -29,6 +29,9 @@ const CardStats = ({ icon, category, title, description }) => {
                         {description}
                     </Typography>
                 </CardActions>
+                <CardActions>
+                    <Button variant="contained" href={"/detail"}>Details</Button>
+                </CardActions>
             </StyledCard>
         </Grid>
     );
@@ -39,36 +42,44 @@ function AdminCard(dPerso) {
     return (
         <Grid container spacing={2} sx={{ p: 2, alignItems: 'stretch' }}>
             <CardStats
-                icon={dPerso.dPerso.sousraces.races.icone}
+                icon=""
                 category="Race"
-                title={dPerso.dPerso.sousraces.races.nom}
-                description={dPerso.dPerso.sousraces.races.description}
+                title="Gestion des races"
+                description="Vous pouvez modifier supprimer et ajouter une race"
+                boutton="Details"
+                id="Race"
             />
-            {dPerso.dPerso.sousraces.races.nom !== dPerso.dPerso.sousraces.nom && (
-                <CardStats
-                    icon={dPerso.dPerso.sousraces.icone}
-                    category="Sous Race"
-                    title={dPerso.dPerso.sousraces.nom}
-                    description={dPerso.dPerso.sousraces.description}
-                />
-            )}
             <CardStats
-                icon={dPerso.dPerso.sousclasses.classes.icone}
+                icon=""
+                category="Sous Race"
+                title="Gestion des sous races"
+                description="Vous pouvez modifier supprimer et ajouter une race"
+                boutton="Details"
+                id="SousRace"
+            />
+            <CardStats
+                icon=""
                 category="Classe"
-                title={dPerso.dPerso.sousclasses.classes.nom}
-                description={dPerso.dPerso.sousclasses.classes.description}
+                title="Gestion des classe"
+                description="Vous pouvez modifier supprimer et ajouter une race"
+                boutton="Details"
+                id="Classe"
             />
             <CardStats
-                icon={dPerso.dPerso.sousclasses.icone}
+                icon=""
                 category="Sous Classe"
-                title={dPerso.dPerso.sousclasses.nom}
-                description={dPerso.dPerso.sousclasses.description}
+                title="Gestion des sous classe"
+                description="Vous pouvez modifier supprimer et ajouter une race"
+                boutton="Details"
+                id="SousClasse"
             />
             <CardStats
-                icon={dPerso.dPerso.origines.icone}
+                icon=""
                 category="Origine"
-                title={dPerso.dPerso.origines.nom}
-                description={dPerso.dPerso.origines.description}
+                title="Gestion des origine"
+                description="Vous pouvez modifier supprimer et ajouter une race"
+                boutton="Details"
+                id="Origine"
             />
         </Grid>
     );
