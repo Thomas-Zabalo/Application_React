@@ -4,7 +4,7 @@ import Personnage from "../../models/PersonnageController";
 import { Link } from "react-router-dom";
 
 function PersoUser() {
-    
+
     const [lPerso, setLPerso] = useState([]);
 
     useEffect(() => {
@@ -89,16 +89,16 @@ function PersoUser() {
                             <CardActions>
                                 <Button variant="contained" component={Link} to={"/detail/" + item.id}>Details</Button>
                                 <Button variant="contained" sx={{
-                                    backgroundColor: 'orange', // Use the theme's error color
+                                    backgroundColor: 'orange',
                                     '&:hover': {
-                                        backgroundColor: '#e65100' // Use a darker version of the error color on hover
+                                        backgroundColor: '#E59C03'
                                     }
                                 }} component={Link} to={"/modifier/" + item.id}>Modifier</Button>
 
                                 <Button variant="contained" sx={{
-                                    backgroundColor: 'error.main', // Use the theme's error color
+                                    backgroundColor: 'error.main',
                                     '&:hover': {
-                                        backgroundColor: 'error.dark' // Use a darker version of the error color on hover
+                                        backgroundColor: 'error.dark'
                                     }
                                 }} onClick={() => handleSuppression(item.id)}>Supprimer</Button>
                             </CardActions>

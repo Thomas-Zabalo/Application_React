@@ -85,12 +85,8 @@ function ProfilScreen() {
                             </Grid>
                             <PersoUser />
                         </Box>
-
                     </Card>
-
                 </Box>
-
-
             </Container>
         </Box>
     );

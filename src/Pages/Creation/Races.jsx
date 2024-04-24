@@ -16,11 +16,20 @@ function Race() {
     }, []);
 
     function getRaces() {
-        const fetchOptions = { method: "GET" };
+        const fetchOptions = {
+            method: "GET"
+        };
         fetch(url, fetchOptions)
-            .then(response => response.json())
-            .then(data => setRaces(data))
-            .catch(error => console.log(error));
+            .then((response) => {
+                return response.json();
+            })
+            .then(dataJSON => {
+                console.log(dataJSON)
+                setRaces(dataJSON)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
     const toggleSelect = (itemId) => {
@@ -79,7 +88,7 @@ function Race() {
 
 
                     <Grid item xs={12} sm={6} >
-                    <Card sx={{ height: '500px', display: 'flex', flexDirection: 'column',  boxShadow: 3 }}>
+                        <Card sx={{ height: '500px', display: 'flex', flexDirection: 'column', boxShadow: 3 }}>
                             {selectedRace && (
                                 <Box sx={{ p: 2, textAlign: 'center' }}>
                                     <Typography variant="h4" sx={{ mb: 1 }}>{selectedRace.nom}</Typography>

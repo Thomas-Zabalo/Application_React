@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Card, CardContent, Typography, Box, Avatar, Divider, CardActions, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 const StyledCard = styled(Card)(({ theme }) => ({
     height: '100%',
@@ -8,7 +9,16 @@ const StyledCard = styled(Card)(({ theme }) => ({
     flexDirection: 'column',
 }));
 
-const CardStats = ({ icon, category, title, description }) => {
+const CardStats = ({ icon, category, title, description, id }) => {
+    const navigate = useNavigate();
+
+    const handleDetail = () => {
+        navigate(`/gestion/${id}`);
+    };
+    const handleAjout = () => {
+        navigate(`/Ajout/${id}`);
+    };
+
     return (
         <Grid item xs={12} sm={6} md={3} sx={{ display: 'flex' }}>
             <StyledCard sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -30,7 +40,12 @@ const CardStats = ({ icon, category, title, description }) => {
                     </Typography>
                 </CardActions>
                 <CardActions>
-                    <Button variant="contained" href={"/detail"}>Details</Button>
+                    <Button variant="contained" onClick={handleDetail}>Details</Button>
+                    <Button variant="contained" sx={{
+                        backgroundColor: "#82E600", '&:hover': {
+                            backgroundColor: '#22E500'
+                        }
+                    }} onClick={handleAjout}>Ajouter</Button>
                 </CardActions>
             </StyledCard>
         </Grid>
@@ -47,7 +62,7 @@ function AdminCard(dPerso) {
                 title="Gestion des races"
                 description="Vous pouvez modifier supprimer et ajouter une race"
                 boutton="Details"
-                id="Race"
+                id="races"
             />
             <CardStats
                 icon=""
@@ -55,7 +70,7 @@ function AdminCard(dPerso) {
                 title="Gestion des sous races"
                 description="Vous pouvez modifier supprimer et ajouter une race"
                 boutton="Details"
-                id="SousRace"
+                id="sousraces"
             />
             <CardStats
                 icon=""
@@ -63,7 +78,7 @@ function AdminCard(dPerso) {
                 title="Gestion des classe"
                 description="Vous pouvez modifier supprimer et ajouter une race"
                 boutton="Details"
-                id="Classe"
+                id="classes"
             />
             <CardStats
                 icon=""
@@ -71,7 +86,7 @@ function AdminCard(dPerso) {
                 title="Gestion des sous classe"
                 description="Vous pouvez modifier supprimer et ajouter une race"
                 boutton="Details"
-                id="SousClasse"
+                id="sousclasses"
             />
             <CardStats
                 icon=""
@@ -79,7 +94,7 @@ function AdminCard(dPerso) {
                 title="Gestion des origine"
                 description="Vous pouvez modifier supprimer et ajouter une race"
                 boutton="Details"
-                id="Origine"
+                id="origines"
             />
         </Grid>
     );

@@ -1,12 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { Card, CardContent, CardActions, Button, Typography, Grid } from "@mui/material";
-import Personnage from "../../models/PersonnageController";
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
+import React from "react";
+import { Container, Box, Stack } from "@mui/material";
 import Sidebar from "../../components/Nav/Sidebar";
-import Stack from '@mui/material/Stack';
-import SearchBar from "../../components/Home/SearchBar";
 import TextAdmin from "../../components/Admin/TextAdmin";
 import AdminCard from "../../components/Admin/CardAdmin";
 

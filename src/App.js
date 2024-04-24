@@ -10,10 +10,13 @@ import Detail from './Pages/ListPerso/Detail';
 import SignUpScreen from './Pages/Connexion/SignUpScreen';
 import LoginScreen from './Pages/Connexion/LoginScreen';
 
-//Admin / Route protégé Screen
+//Route protégé Screen
 import { ProtectedRoute, ProtectedAdmin } from './components/Authentification/Protected';
+
+//Admin
 import Admin from './Pages/Admin/AdminScreen';
 import Gestion from './Pages/Admin/Gestion';
+import Ajout from './Pages/Admin/Ajout';
 
 //Creation Personnage Screen
 import ProfilScreen from './Pages/Profil/ProfilScreen';
@@ -42,9 +45,14 @@ export default function App() {
               <Admin />
             </ProtectedAdmin>} />
 
-          <Route path="/Gestion" element={
+          <Route path="/Gestion/:id" element={
             <ProtectedAdmin>
               <Gestion />
+            </ProtectedAdmin>} />
+
+          <Route path="/Ajout/:id" element={
+            <ProtectedAdmin>
+              <Ajout />
             </ProtectedAdmin>} />
 
           <Route path="/Detail/:idPerso" element={<Detail />} />
