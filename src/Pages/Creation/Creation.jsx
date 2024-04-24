@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from 'react'
 import Sidebar from "../../components/Nav/Sidebar";
 import Box from '@mui/material/Box';
@@ -6,7 +5,6 @@ import Container from '@mui/material/Container';
 import Typography from "@mui/material/Typography";
 import UserCard from "../../components/Utilisateur/CreaCard";
 import Button from "@mui/material/Button";
-import Personnage from "../../models/PersonnageController";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,7 +13,6 @@ function Creation() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // console.log(location)
     const [Perso, setPerso] = useState(null);
     const nom = location.state ? location.state.nom : null;
 
@@ -23,7 +20,7 @@ function Creation() {
     useEffect(() => {
         const url = `https://zabalo.alwaysdata.net/sae401/api/personnages?nom=${nom}`;
         PersoDetail(url);
-    }, []);
+    }, [nom]);
 
     function PersoDetail(url) {
         const fetchOptions = {
@@ -41,9 +38,6 @@ function Creation() {
                 console.error(error);
             });
     };
-
-    console.log(Perso)
-
 
 
     return (

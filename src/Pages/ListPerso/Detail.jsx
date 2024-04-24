@@ -52,6 +52,9 @@ function Detail() {
         <Box sx={{ display: 'flex' }}>
             <Sidebar />
             <Container>
+                <Button variant="contained" sx={{ mt: 5 }} onClick={() => navigate(`/Admin`)}>
+                    <ArrowBackIosIcon /> Retour
+                </Button>
                 <div>
                     {dPerso && (
                         <>

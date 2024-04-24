@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -76,12 +76,6 @@ export default function LoginScreen() {
             });
     }
 
-    useEffect(() => {
-        const token = localStorage.getItem('userToken');
-        const id = localStorage.getItem('userData');
-        const admin = localStorage.getItem('userAdmin');
-
-    }, []);
 
     return (
         <Box sx={{ display: 'flex', mb: 5 }}>

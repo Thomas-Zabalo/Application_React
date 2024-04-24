@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Box, Stack, Card, Typography, Grid, CardContent, Avatar, CardActions, Button } from "@mui/material";
+import { Container, Box, Stack, Card, Typography, Grid, CardContent, CardActions, Button } from "@mui/material";
 import { useParams } from 'react-router-dom'; //
 import Sidebar from "../../components/Nav/Sidebar";
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +18,7 @@ function Gestion() {
 
     useEffect(() => {
         detail(url);
-    }, []);
+    }, [url]);
 
 
     function detail(url) {
