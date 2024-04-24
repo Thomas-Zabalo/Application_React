@@ -22,7 +22,6 @@ export default function Admin() {
                         <AdminCard />
                     </Stack>
                 </Box>
-
             </Container>
         </Box >
     );
