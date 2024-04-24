@@ -8,7 +8,6 @@ import Dashboard from "../../components/Home/Card";
 import Personnage from "../../models/PersonnageController";
 
 function Detail() {
-
     const { idPerso } = useParams();
     const [dPerso, setdPerso] = useState(null);
 
@@ -26,7 +25,6 @@ function Detail() {
                 return response.json();
             })
             .then((dataJSON) => {
-                console.log(dataJSON)
                 let personnage = new Personnage(
                     dataJSON.sousraces_id,
                     dataJSON.origines_id,
@@ -38,9 +36,7 @@ function Detail() {
                     dataJSON.sousclasses,
                     dataJSON.sousraces,
                     dataJSON.origines
-                );
-                console.log(dataJSON)
-                console.log(personnage)
+                )
                 setdPerso(personnage);
             })
             .catch((error) => {
@@ -48,13 +44,10 @@ function Detail() {
             });
     };
 
-    return (
+        return (
         <Box sx={{ display: 'flex' }}>
             <Sidebar />
             <Container>
-                <Button variant="contained" sx={{ mt: 5 }} onClick={() => navigate(`/Admin`)}>
-                    <ArrowBackIosIcon /> Retour
-                </Button>
                 <div>
                     {dPerso && (
                         <>

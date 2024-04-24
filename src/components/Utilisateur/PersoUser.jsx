@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardActions, Button, Typography, Grid, Box } from "@mui/material";
 import Personnage from "../../models/PersonnageController";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function PersoUser() {
 
     const [lPerso, setLPerso] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const accessToken = localStorage.getItem('userToken');
@@ -87,13 +89,15 @@ function PersoUser() {
                                 <Typography variant="body2">"a benevolent smile"</Typography>
                             </CardContent>
                             <CardActions>
-                                <Button variant="contained" component={Link} to={"/detail/" + item.id}>Details</Button>
+                                <Button variant="contained" component={Link} to={"/detail/" + item.id}>
+                                    Details
+                                </Button>
                                 <Button variant="contained" sx={{
                                     backgroundColor: 'orange',
                                     '&:hover': {
                                         backgroundColor: '#E59C03'
                                     }
-                                }} component={Link} to={"/modifier/" + item.id}>Modifier</Button>
+                                }} component={Link} to={"/Modifier/" + item.id}>Modifier</Button>
 
                                 <Button variant="contained" sx={{
                                     backgroundColor: 'error.main',

@@ -20,6 +20,7 @@ import Ajout from './Pages/Admin/Ajout';
 
 //Creation Personnage Screen
 import ProfilScreen from './Pages/Profil/ProfilScreen';
+import Modifier from './Pages/Profil/Modifier';
 
 //Creation Personnage Screen
 import Race from './Pages/Creation/Races';
@@ -60,6 +61,12 @@ export default function App() {
           <Route path="/Profil" element={
             <ProtectedRoute>
               <ProfilScreen />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/Modifier/:id" element={
+            <ProtectedRoute>
+              <Modifier />
             </ProtectedRoute>
           } />
 

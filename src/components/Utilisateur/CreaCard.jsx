@@ -35,7 +35,6 @@ const CardStats = ({ icon, category, title, description }) => {
 };
 
 function UserCard(Perso) {
-    console.log(Perso.Perso)
     return (
         <Grid container spacing={2} sx={{ p: 2, alignItems: 'stretch' }}>
             <CardStats
