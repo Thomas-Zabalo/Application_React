@@ -52,7 +52,7 @@ const CardStats = ({ icon, category, title, description, id }) => {
     );
 };
 
-function AdminCard(dPerso) {
+function AdminCard() {
     return (
         <Grid container spacing={2} sx={{ p: 2, alignItems: 'stretch' }}>
             <CardStats
