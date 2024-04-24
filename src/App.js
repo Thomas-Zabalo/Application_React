@@ -17,6 +17,7 @@ import { ProtectedRoute, ProtectedAdmin } from './components/Authentification/Pr
 import Admin from './Pages/Admin/AdminScreen';
 import Gestion from './Pages/Admin/Gestion';
 import Ajout from './Pages/Admin/Ajout';
+import Modification from './Pages/Admin/Modification';
 
 //Creation Personnage Screen
 import ProfilScreen from './Pages/Profil/ProfilScreen';
@@ -68,6 +69,12 @@ export default function App() {
             <ProtectedRoute>
               <Modifier />
             </ProtectedRoute>
+          } />
+
+          <Route path="/ModifAdmin/:id" element={
+            <ProtectedAdmin>
+              <Modification />
+            </ProtectedAdmin>
           } />
 
           <Route path="/Nouveau" element={

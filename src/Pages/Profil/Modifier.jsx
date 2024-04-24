@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Box, Stack, Card, Typography, Grid, FormControlLabel, RadioGroup, Radio, Button, TextField, Avatar } from "@mui/material";
+import { Container, Box, Stack, Card, Typography, Grid, FormControlLabel, RadioGroup, Radio, Button, TextField } from "@mui/material";
 import { useParams } from 'react-router-dom'; //
 import Sidebar from "../../components/Nav/Sidebar";
 import { useNavigate } from 'react-router-dom';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import Personnage from '../../models/PersonnageController';
-import { Token } from '@mui/icons-material';
 
 function Modifier() {
     const [dPerso, setdPerso] = useState(null);
@@ -18,7 +16,6 @@ function Modifier() {
     const [classes, setClasses] = useState([]);
     const [sousclasses, setSousClasses] = useState([]);
     const [origines, setOrigines] = useState([]);
-    const [userId, setUserId] = useState([]);
 
     const [selectedRaceId, setSelectedRaceId] = useState('');
     const [selectedSousRaceId, setSelectedSousRaceId] = useState('');
@@ -52,7 +49,6 @@ function Modifier() {
                 setSelectedClasseId(dataJSON.sousclasses.classes_id);
                 setSelectedSousClasseId(dataJSON.sousclasses_id);
                 setSelectedOrigineId(dataJSON.origines_id)
-                setUserId(dataJSON.user_id)
             })
             .catch((error) => {
                 console.error(error);
@@ -208,7 +204,6 @@ function Modifier() {
             };
             console.log(persoData)
             const url = `https://zabalo.alwaysdata.net/sae401/api/personnages/${id}`;
-            console.log(url)
             ModifPerso(url, persoData, accessToken);
             navigate('/profil')
         }
