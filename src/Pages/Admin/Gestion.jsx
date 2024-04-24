@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 function Gestion() {
-    const {id} = useParams();
+    const { id } = useParams();
     const [data, setData] = useState([]);
     const navigate = useNavigate();
 
@@ -98,7 +98,8 @@ function Gestion() {
                                             '&:hover': {
                                                 backgroundColor: '#E59C03'
                                             }
-                                        }} > Modifier</Button>
+                                        }} onClick={() => navigate(`/ModifAdmin/` + item.id, { state: { info: id } })}> Modifier</Button>
+
                                         <Button variant="contained" color="error" onClick={() => handleSuppression(item.id)}>
                                             Supprimer
                                         </Button>

@@ -51,7 +51,8 @@ function ProfilScreen() {
             formData.append('email', email);
             formData.append('image', image);
             const accessToken = localStorage.getItem('userToken');
-            const url = `https://zabalo.alwaysdata.net/sae401/api/utilisateur/`;
+            const userId = localStorage.getItem('userData');
+            const url = `https://zabalo.alwaysdata.net/sae401/api/utilisateur/${userId}`;
             modifProfil(url, formData, accessToken);
         }
     }
