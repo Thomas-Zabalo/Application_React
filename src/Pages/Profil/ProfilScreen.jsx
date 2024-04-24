@@ -46,6 +46,7 @@ function ProfilScreen() {
         event.preventDefault();
 
         if (!name || !email || !image) {
+        
             const formData = new FormData();
             formData.append('nom', name);
             formData.append('email', email);

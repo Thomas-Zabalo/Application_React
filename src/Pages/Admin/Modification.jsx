@@ -18,7 +18,6 @@ function Modification() {
     const [imagePreviewUrl, setImagePreviewUrl] = useState('');
 
 
-    console.log(nom, description, image)
     //Affichage des informations du personnages
 
     useEffect(() => {
@@ -47,27 +46,27 @@ function Modification() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        const formData = new FormData();
-        formData.append('nom', nom);
-        formData.append('description', description);
-        formData.append('image', image);
-        formData.append('id', id);
-
+        const Data = {
+            nom: nom,
+            description: description,
+            icone: imagePreviewUrl
+        };
         const accessToken = localStorage.getItem('userToken');
         const url = `https://zabalo.alwaysdata.net/sae401/api/${lien}/${id}`;
 
-        ModifPerso(url, formData, accessToken);
+        ModifPerso(url, Data, accessToken);
         navigate(`/gestion/${lien}`)
     }
 
-    function ModifPerso(url, formData, accessToken) {
+    function ModifPerso(url, Data, accessToken) {
+        console.log(Data)
         const fetchOptions = {
             method: "PUT",
             headers: {
+                'Content-Type': 'application/json',
                 Authorization: `Bearer ${accessToken}`
             },
-            body: formData
+            body: JSON.stringify(Data)
         };
         fetch(url, fetchOptions)
             .then((response) => {

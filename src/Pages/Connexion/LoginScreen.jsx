@@ -43,8 +43,6 @@ export default function LoginScreen() {
         }
     };
 
-
-
     function loginUser(userData) {
         const fetchOptions = {
             method: "POST",
