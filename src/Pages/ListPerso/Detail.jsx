@@ -4,7 +4,7 @@ import Sidebar from "../../components/Nav/Sidebar";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from "@mui/material/Typography";
-import Dashboard from "../../components/Card";
+import Dashboard from "../../components/Home/Card";
 import Personnage from "../../models/PersonnageController";
 
 function Detail() {

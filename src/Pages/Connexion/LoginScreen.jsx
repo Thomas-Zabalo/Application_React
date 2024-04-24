@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Sidebar from '../../components/Nav/Sidebar';
-import { useAuth } from '../../components/AuthContext';
+import { useAuth } from '../../components/Authentification/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 

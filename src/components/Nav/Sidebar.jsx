@@ -12,7 +12,7 @@ import FaceIcon from '@mui/icons-material/Face';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
-import { useAuth } from '../../components/AuthContext';
+import { useAuth } from '../Authentification/AuthContext';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 function Sidebar() {

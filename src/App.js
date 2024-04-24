@@ -9,7 +9,7 @@ import Detail from './Pages/ListPerso/Detail';
 import ProfilScreen from './Pages/Profil/ProfilScreen';
 import Race from './Pages/Creation/Races';
 import SousRace from './Pages/Creation/SousRaces';
-import ProtectedRoute from './components/Protected';
+import ProtectedRoute from './components/Authentification/Protected';
 import Admin from './Pages/Admin/AdminScreen';
 import Classe from './Pages/Creation/Classes';
 import SousClasse from './Pages/Creation/SousClasses';

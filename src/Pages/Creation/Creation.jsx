@@ -4,7 +4,7 @@ import Sidebar from "../../components/Nav/Sidebar";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from "@mui/material/Typography";
-import Dashboard from "../../components/CreaCard";
+import UserCard from "../../components/Utilisateur/CreaCard";
 import Button from "@mui/material/Button";
 import Personnage from "../../models/PersonnageController";
 import { useLocation } from 'react-router-dom';
@@ -79,7 +79,7 @@ function Creation() {
                                 <h3>Personnage de {Perso.user.name}</h3>
                             </Typography>
                             <h2>{Perso.nom}</h2>
-                            <Dashboard Perso={Perso} />
+                            <UserCard Perso={Perso} />
                         </>
                     )}
                 </div>

@@ -34,44 +34,44 @@ const CardStats = ({ icon, category, title, description }) => {
     );
 };
 
-function Dashboard(Perso) {
-    console.log(Perso.Perso)
+function AdminCard(dPerso) {
+    console.log(dPerso.dPerso)
     return (
         <Grid container spacing={2} sx={{ p: 2, alignItems: 'stretch' }}>
             <CardStats
-                icon={Perso.Perso.sousraces.races.icone}
+                icon={dPerso.dPerso.sousraces.races.icone}
                 category="Race"
-                title={Perso.Perso.sousraces.races.nom}
-                description={Perso.Perso.sousraces.races.description}
+                title={dPerso.dPerso.sousraces.races.nom}
+                description={dPerso.dPerso.sousraces.races.description}
             />
-            {Perso.Perso.sousraces.races.nom !== Perso.Perso.sousraces.nom && (
+            {dPerso.dPerso.sousraces.races.nom !== dPerso.dPerso.sousraces.nom && (
                 <CardStats
-                    icon={Perso.Perso.sousraces.icone}
+                    icon={dPerso.dPerso.sousraces.icone}
                     category="Sous Race"
-                    title={Perso.Perso.sousraces.nom}
-                    description={Perso.Perso.sousraces.description}
+                    title={dPerso.dPerso.sousraces.nom}
+                    description={dPerso.dPerso.sousraces.description}
                 />
             )}
             <CardStats
-                icon={Perso.Perso.sousclasses.classes.icone}
+                icon={dPerso.dPerso.sousclasses.classes.icone}
                 category="Classe"
-                title={Perso.Perso.sousclasses.classes.nom}
-                description={Perso.Perso.sousclasses.classes.description}
+                title={dPerso.dPerso.sousclasses.classes.nom}
+                description={dPerso.dPerso.sousclasses.classes.description}
             />
             <CardStats
-                icon={Perso.Perso.sousclasses.icone}
+                icon={dPerso.dPerso.sousclasses.icone}
                 category="Sous Classe"
-                title={Perso.Perso.sousclasses.nom}
-                description={Perso.Perso.sousclasses.description}
+                title={dPerso.dPerso.sousclasses.nom}
+                description={dPerso.dPerso.sousclasses.description}
             />
             <CardStats
-                icon={Perso.Perso.origines.icone}
+                icon={dPerso.dPerso.origines.icone}
                 category="Origine"
-                title={Perso.Perso.origines.nom}
-                description={Perso.Perso.origines.description}
+                title={dPerso.dPerso.origines.nom}
+                description={dPerso.dPerso.origines.description}
             />
         </Grid>
     );
 }
 
-export default Dashboard;
+export default AdminCard;
