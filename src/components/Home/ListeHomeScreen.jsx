@@ -28,9 +28,11 @@ export default function ListeHome() {
                         p.nom,
                         p.id,
                         p.user,
-                        p.sousclasses
+                        p.sousclasses,
+                        p.sousraces
                     );
                     l.push(personnage);
+                    console.log(p.sousclasses.nom)
                 }
                 setLPerso(l);
             })
@@ -61,14 +63,12 @@ export default function ListeHome() {
                                     {item.sousclasses.nom}
                                 </Typography>
                                 <Typography variant="body2">
-                                    well meaning and kindly.
-                                    <br />
-                                    {'"a benevolent smile"'}
+                                    {item.sousraces.nom}
                                 </Typography>
                             </CardContent>
-                                <CardActions>
-                                    <Button variant="contained" href={"/detail/" + item.id}>Details</Button>
-                                </CardActions>
+                            <CardActions>
+                                <Button variant="contained" href={"/detail/" + item.id}>Details</Button>
+                            </CardActions>
                         </Card>
                     </Grid>
                 ))}
