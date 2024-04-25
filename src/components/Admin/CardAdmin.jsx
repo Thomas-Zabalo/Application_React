@@ -40,7 +40,7 @@ const CardStats = ({ icon, category, title, description, id }) => {
                     </Typography>
                 </CardActions>
                 <CardActions>
-                    <Button variant="contained" onClick={handleDetail}>Details</Button>
+                    <Button variant="contained" onClick={handleDetail}>Liste</Button>
                     <Button variant="contained" sx={{
                         backgroundColor: "#82E600", '&:hover': {
                             backgroundColor: '#22E500'
@@ -60,7 +60,6 @@ function AdminCard() {
                 category="Race"
                 title="Gestion des races"
                 description="Vous pouvez modifier supprimer et ajouter une race"
-                boutton="Details"
                 id="races"
             />
             <CardStats
@@ -68,7 +67,6 @@ function AdminCard() {
                 category="Sous Race"
                 title="Gestion des sous races"
                 description="Vous pouvez modifier supprimer et ajouter une race"
-                boutton="Details"
                 id="sousraces"
             />
             <CardStats
@@ -76,7 +74,6 @@ function AdminCard() {
                 category="Classe"
                 title="Gestion des classe"
                 description="Vous pouvez modifier supprimer et ajouter une race"
-                boutton="Details"
                 id="classes"
             />
             <CardStats
@@ -84,7 +81,6 @@ function AdminCard() {
                 category="Sous Classe"
                 title="Gestion des sous classe"
                 description="Vous pouvez modifier supprimer et ajouter une race"
-                boutton="Details"
                 id="sousclasses"
             />
             <CardStats
@@ -92,7 +88,6 @@ function AdminCard() {
                 category="Origine"
                 title="Gestion des origine"
                 description="Vous pouvez modifier supprimer et ajouter une race"
-                boutton="Details"
                 id="origines"
             />
 
@@ -101,7 +96,6 @@ function AdminCard() {
                 category="Utilisateurs"
                 title="Gestion des Utilisateurs"
                 description="Vous pouvez modifier supprimer et ajouter les Utilisateurs"
-                boutton="Details"
                 id="users"
             />
         </Grid>

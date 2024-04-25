@@ -18,7 +18,7 @@ function Gestion() {
     let url = `https://zabalo.alwaysdata.net/sae401/api/${id}`;
 
     useEffect(() => {
-        detail(url,accessToken);
+        detail(url, accessToken);
     }, [url]);
 
 
@@ -26,7 +26,7 @@ function Gestion() {
         const fetchOptions = {
             headers: {
                 Authorization: `Bearer ${accessToken}`
-            }, 
+            },
             method: "GET"
         };
         fetch(url, fetchOptions)
@@ -94,7 +94,7 @@ function Gestion() {
                             <Grid item xs={12} sm={6} md={3} key={item.id}>
                                 <Card sx={{ width: '100%', m: 1 }}>
                                     <CardContent>
-                                        <Typography>{item.nom}</Typography>
+                                        <Typography>{item.nom ? item.nom : item.name}</Typography>
                                     </CardContent>
                                     <Avatar
                                         src={item.icone}

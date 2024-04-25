@@ -11,10 +11,14 @@ function Modification() {
     const { id } = useParams();
     const location = useLocation();
     const lien = location.state.info
+    const accessToken = localStorage.getItem('userToken');
 
     const [nom, setNom] = useState('');
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [image, setImage] = useState('');
+
     const [description, setDescription] = useState('');
-    const [image, setImage] = useState("");
     const [imagePreviewUrl, setImagePreviewUrl] = useState('');
 
 
@@ -27,8 +31,15 @@ function Modification() {
 
 
     function PersoUser(url) {
+        console.log(accessToken);
+
         const fetchOptions = {
-            method: "GET"
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`
+            },
+
         };
         fetch(url, fetchOptions)
             .then((response) => {
@@ -37,6 +48,8 @@ function Modification() {
             .then((dataJSON) => {
                 setDescription(dataJSON.description)
                 setNom(dataJSON.nom)
+                setName(dataJSON.name)
+                setEmail(dataJSON.email)
                 setImagePreviewUrl(dataJSON.icone)
             })
             .catch((error) => {
@@ -50,7 +63,6 @@ function Modification() {
             nom: nom,
             description: description
         };
-        const accessToken = localStorage.getItem('userToken');
         const url = `https://zabalo.alwaysdata.net/sae401/api/${lien}/${id}`;
 
         ModifPerso(url, Data, accessToken);
@@ -66,19 +78,19 @@ function Modification() {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${accessToken}`
-            }, 
+            },
             body: JSON.stringify(Data)
         };
         fetch(url, fetchOptions)
-        .then((response) => {
-            return response.json();
-        })
-        .then(dataJSON => {
-            console.log(dataJSON)
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+            .then((response) => {
+                return response.json();
+            })
+            .then(dataJSON => {
+                console.log(dataJSON)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
 
@@ -173,8 +185,8 @@ function Modification() {
                                             required
                                             fullWidth
                                             label="Nom"
-                                            value={nom}
-                                            onChange={e => setNom(e.target.value)}
+                                            value={nom ? nom : name}
+                                            onChange={nom ? e => setNom(e.target.value) : e => setName(e.target.value)}
                                         />
                                         <TextField
                                             margin="normal"
@@ -182,9 +194,9 @@ function Modification() {
                                             fullWidth
                                             multiline
                                             rows={4}
-                                            label="Description"
-                                            value={description}
-                                            onChange={e => setDescription(e.target.value)}
+                                            label={description ? "Description" : "Email"}
+                                            value={description ? description : email}
+                                            onChange={description ? e => setDescription(e.target.value) : e => setEmail(e.target.value)}
                                         />
                                     </Grid>
                                 </Grid>
