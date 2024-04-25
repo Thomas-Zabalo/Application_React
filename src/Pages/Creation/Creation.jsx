@@ -7,6 +7,7 @@ import UserCard from "../../components/Utilisateur/CreaCard";
 import Button from "@mui/material/Button";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 
 function Creation() {
@@ -17,7 +18,7 @@ function Creation() {
     const [Perso, setPerso] = useState(null);
     const id = location.state ? location.state.id : null;
 
-    
+
     useEffect(() => {
         const url = `https://zabalo.alwaysdata.net/sae401/api/personnages/${id}`;
         PersoDetail(url);
@@ -52,17 +53,8 @@ function Creation() {
 
                     {Perso && (
                         <>
-                            <Button
-                                variant="contained"
-                                sx={{
-                                    borderRadius: 20,
-
-                                    fontSize: 10,
-                                    p: 0.5
-                                }}
-                                onClick={() => navigate('/')}
-                            >
-                                Accueil
+                            <Button variant="contained" sx={{ mt: 5 }} onClick={() => navigate(`/`)}>
+                                <ArrowBackIosIcon /> Accueil
                             </Button>
                             <Typography
                                 variant="h1"
