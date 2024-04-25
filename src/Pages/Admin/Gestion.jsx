@@ -9,6 +9,7 @@ function Gestion() {
     const { id } = useParams();
     const [data, setData] = useState([]);
     const navigate = useNavigate();
+    const accessToken = localStorage.getItem('userToken');
 
     const handleNavigate = () => {
         navigate(`/Admin`);
@@ -17,12 +18,15 @@ function Gestion() {
     let url = `https://zabalo.alwaysdata.net/sae401/api/${id}`;
 
     useEffect(() => {
-        detail(url);
+        detail(url,accessToken);
     }, [url]);
 
 
-    function detail(url) {
+    function detail(url, accessToken) {
         const fetchOptions = {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }, 
             method: "GET"
         };
         fetch(url, fetchOptions)
