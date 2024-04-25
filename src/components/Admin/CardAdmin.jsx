@@ -95,6 +95,15 @@ function AdminCard() {
                 boutton="Details"
                 id="origines"
             />
+
+<CardStats
+                icon=""
+                category="Utilisateurs"
+                title="Gestion des Utilisateurs"
+                description="Vous pouvez modifier supprimer et ajouter les Utilisateurs"
+                boutton="Details"
+                id="users"
+            />
         </Grid>
     );
 }
