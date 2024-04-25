@@ -11,7 +11,7 @@ function Origine() {
     const location = useLocation();
 
     const [name, setName] = useState('');
-    const [persoId, setpersoId] = useState('');
+    const accessToken = localStorage.getItem('userToken');
 
     const handleNomChange = (event) => setName(event.target.value);
 
@@ -46,20 +46,15 @@ function Origine() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const userId = localStorage.getItem('userData');
-        const accessToken = localStorage.getItem('userToken');
         if (name !== '') {
             const persoData = {
                 sousraces_id: sousraceid,
                 sousclasses_id: sousclasseid,
                 origines_id: selectedItem,
-                user_id: userId,
                 nom: name
             };
             let newUrl = "https://zabalo.alwaysdata.net/sae401/api/personnages"
-            let persoID = AddPerso(newUrl, persoData, accessToken);
-            console.log(persoId)
-            navigate('/creation', { state: { id: persoID } })
+            AddPerso(newUrl, persoData, accessToken);
         }
     };
 
@@ -72,14 +67,13 @@ function Origine() {
             },
             body: JSON.stringify(persoData)
         };
-        return fetch(newUrl, fetchOptions)
+        fetch(newUrl, fetchOptions)
             .then((response) => {
                 return response.json();
             })
-            .then(dataJSON => {
-                setpersoId(dataJSON[0])
-                console.log(dataJSON[0])
-                return (dataJSON[0])
+            .then((dataJSON) => {
+                console.log(dataJSON)
+                navigate('/creation', { state: { id: dataJSON[0] } }); // Passer l'ID du personnage à la page suivante
             })
             .catch((error) => {
                 console.error(error);

@@ -17,7 +17,7 @@ function Creation() {
     const [Perso, setPerso] = useState(null);
     const id = location.state ? location.state.id : null;
 
-    console.log(id);
+    
     useEffect(() => {
         const url = `https://zabalo.alwaysdata.net/sae401/api/personnages/${id}`;
         PersoDetail(url);
