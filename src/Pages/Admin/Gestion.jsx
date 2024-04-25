@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Box, Stack, Card, Typography, Grid, CardContent, CardActions, Button } from "@mui/material";
+import { Container, Box, Stack, Card, Typography, Grid, CardContent, CardActions, Button, Avatar } from "@mui/material";
 import { useParams } from 'react-router-dom'; //
 import Sidebar from "../../components/Nav/Sidebar";
 import { useNavigate } from 'react-router-dom';
@@ -92,6 +92,11 @@ function Gestion() {
                                     <CardContent>
                                         <Typography>{item.nom}</Typography>
                                     </CardContent>
+                                    <Avatar
+                                        src={item.icone}
+                                        sx={{ width: 200, height: 200, mb: 2 }}
+                                        variant="rounded"
+                                    />
                                     <CardActions>
                                         <Button variant="contained" sx={{
                                             backgroundColor: 'orange',
