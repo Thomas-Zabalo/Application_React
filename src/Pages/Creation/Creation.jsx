@@ -12,19 +12,23 @@ import { useNavigate } from 'react-router-dom';
 function Creation() {
     const navigate = useNavigate();
     const location = useLocation();
+    const accessToken = localStorage.getItem('userToken');
 
     const [Perso, setPerso] = useState(null);
-    const nom = location.state ? location.state.nom : null;
+    const id = location.state ? location.state.id : null;
 
-
+    console.log(id);
     useEffect(() => {
-        const url = `https://zabalo.alwaysdata.net/sae401/api/personnages?nom=${nom}`;
+        const url = `https://zabalo.alwaysdata.net/sae401/api/personnages/${id}`;
         PersoDetail(url);
-    }, [nom]);
+    }, [id]);
 
     function PersoDetail(url) {
         const fetchOptions = {
             method: "GET",
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
         }
         fetch(url, fetchOptions)
             .then((response) => {

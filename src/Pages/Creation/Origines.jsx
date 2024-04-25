@@ -11,6 +11,8 @@ function Origine() {
     const location = useLocation();
 
     const [name, setName] = useState('');
+    const [persoId, setpersoId] = useState('');
+
     const handleNomChange = (event) => setName(event.target.value);
 
     const [Origines, setOrigines] = useState([]);
@@ -55,8 +57,9 @@ function Origine() {
                 nom: name
             };
             let newUrl = "https://zabalo.alwaysdata.net/sae401/api/personnages"
-            AddPerso(newUrl, persoData, accessToken);
-            navigate('/creation', { state: { nom: name }})
+            let persoID = AddPerso(newUrl, persoData, accessToken);
+            console.log(persoId)
+            navigate('/creation', { state: { id: persoID } })
         }
     };
 
@@ -69,7 +72,18 @@ function Origine() {
             },
             body: JSON.stringify(persoData)
         };
-        fetch(newUrl, fetchOptions)
+        return fetch(newUrl, fetchOptions)
+            .then((response) => {
+                return response.json();
+            })
+            .then(dataJSON => {
+                setpersoId(dataJSON[0])
+                console.log(dataJSON[0])
+                return (dataJSON[0])
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
     return (
@@ -135,7 +149,7 @@ function Origine() {
                             required
                             fullWidth
                             id="nom"
-                            label="Nom d'utilisateur"
+                            label="Nom du personnage"
                             name="nom"
                             value={name}
                             onChange={handleNomChange}
