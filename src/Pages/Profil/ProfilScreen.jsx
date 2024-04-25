@@ -9,6 +9,7 @@ function ProfilScreen() {
     const [email, setEmail] = useState('');
     const [image, setImage] = useState("");
     const [imagePreviewUrl, setImagePreviewUrl] = useState('');
+    const userId = localStorage.getItem('userData');
 
     useEffect(() => {
         const accessToken = localStorage.getItem('userToken');
@@ -52,7 +53,6 @@ function ProfilScreen() {
             };
             const accessToken = localStorage.getItem('userToken');
             console.log(accessToken);
-            const userId = localStorage.getItem('userData');
             const url = `https://zabalo.alwaysdata.net/sae401/api/users/${userId}`;
             modifProfil(url, NewUserData, accessToken);
         }
@@ -80,9 +80,30 @@ function ProfilScreen() {
     };
 
 
+    function ModifImage(url, formData, accessToken) {
+        console.log(formData)
+        const fetchOptions = {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+            body: formData
+        };
+        fetch(url, fetchOptions)
+            .then((response) => {
+                return response.json();
+            })
+            .then(dataJSON => {
+                console.log(dataJSON)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
     const handleImageChange = (e) => {
-        if (e.target.files[0]) {
-            const file = e.target.files[0];
+        const file = e.target.files[0];
+        if (file) {
             setImage(file);
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -90,7 +111,13 @@ function ProfilScreen() {
             };
             reader.readAsDataURL(file);
         }
-    };
+        const formData = new FormData();
+        formData.append('image', file);
+        const accessToken = localStorage.getItem('userToken');
+        const url = `https://zabalo.alwaysdata.net/sae401/api/users/${userId}/icone`;
+
+        ModifImage(url, formData, accessToken);
+    }
 
     return (
         <Box sx={{ display: 'flex' }}>
