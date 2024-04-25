@@ -36,7 +36,7 @@ function Creation() {
             })
             .then((dataJSON) => {
                 console.log(dataJSON)
-                setPerso(dataJSON[0]);
+                setPerso(dataJSON);
             })
             .catch((error) => {
                 console.error(error);
