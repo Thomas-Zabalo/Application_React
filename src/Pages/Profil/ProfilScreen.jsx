@@ -45,26 +45,27 @@ function ProfilScreen() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (!name || !email || !image) {
-        
-            const formData = new FormData();
-            formData.append('nom', name);
-            formData.append('email', email);
-            formData.append('image', image);
+        if (name && email ) {
+            const NewUserData = {
+                name: name,
+                email: email
+            };
             const accessToken = localStorage.getItem('userToken');
+            console.log(accessToken);
             const userId = localStorage.getItem('userData');
-            const url = `https://zabalo.alwaysdata.net/sae401/api/utilisateur/${userId}`;
-            modifProfil(url, formData, accessToken);
+            const url = `https://zabalo.alwaysdata.net/sae401/api/users/${userId}`;
+            modifProfil(url, NewUserData, accessToken);
         }
     }
 
-    function modifProfil(url, formData, token) {
+    function modifProfil(url, NewUserData, token) {
         const fetchOptions = {
             method: "PUT",
             headers: {
+                'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
             },
-            body: formData
+            body: JSON.stringify(NewUserData)
         };
         fetch(url, fetchOptions)
             .then((response) => {
