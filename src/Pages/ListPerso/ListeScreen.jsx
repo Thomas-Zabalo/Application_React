@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Card, CardContent, CardActions, Button, Typography, Grid } from "@mui/material";
+import { Card, CardContent, CardActions, Button, Typography, Grid, Avatar } from "@mui/material";
 import Personnage from "../../models/PersonnageController";
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -73,6 +73,10 @@ export default function Liste() {
                         <Grid item key={index} xs={12} sm={6} md={4} lg={3} sx={{ paddingRight: 0, marginRight: 0 }}>
                             <Card sx={{ minWidth: 275 }}>
                                 <CardContent>
+                                    <Box sx={{ color: 'warning.main', p: 2, textAlign: 'center', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                                        <Avatar src={item.sousclasses.icone} sx={{ backgroundColor: "black" }} />
+                                        <Avatar src={item.sousraces.icone} sx={{ backgroundColor: "black" }} />
+                                    </Box>
                                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                         {item.user.name}
                                     </Typography>
@@ -81,11 +85,6 @@ export default function Liste() {
                                     </Typography>
                                     <Typography sx={{ mb: 1.5 }} color="text.secondary">
                                         {item.sousclasses.nom}
-                                    </Typography>
-                                    <Typography variant="body2">
-                                        well meaning and kindly.
-                                        <br />
-                                        {'"a benevolent smile"'}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>

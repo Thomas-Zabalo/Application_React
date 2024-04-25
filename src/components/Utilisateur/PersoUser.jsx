@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, CardActions, Button, Typography, Grid, Box } from "@mui/material";
+import { Card, CardContent, CardActions, Button, Typography, Grid, Box, Avatar, } from "@mui/material";
 import Personnage from "../../models/PersonnageController";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
@@ -34,9 +34,12 @@ function PersoUser() {
                     p.nom,
                     p.id,
                     p.user,
-                    p.sousclasses
+                    p.sousclasses,
+                    p.sousraces,
+                    p.origines
                 ));
                 setLPerso(personnages);
+                console.log(personnages)
             })
             .catch(error => {
                 console.error('Error fetching characters:', error);
@@ -45,7 +48,6 @@ function PersoUser() {
 
     const handleSuppression = (id) => {
         if (window.confirm("Êtes-vous sûr de vouloir supprimer ce personnage ?")) {
-            console.log("cooncon")
             supprimerPersonnage(id)
         }
         // supprimerPersonnage(id)
@@ -84,9 +86,12 @@ function PersoUser() {
                     <Grid item key={index} xs={12} sm={6} md={4}>
                         <Card sx={{ minWidth: 275 }}>
                             <CardContent>
+                                <Box sx={{ color: 'warning.main', p: 2, textAlign: 'center', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                                    <Avatar src={item.sousclasses.icone} sx={{ backgroundColor: "black" }} />
+                                    <Avatar src={item.sousraces.icone} sx={{ backgroundColor: "black" }} />
+                                </Box>
                                 <Typography variant="h5" component="div">{item.nom}</Typography>
                                 <Typography sx={{ mb: 1.5 }} color="text.secondary">{item.sousclasses.nom}</Typography>
-                                <Typography variant="body2">"a benevolent smile"</Typography>
                             </CardContent>
                             <CardActions>
                                 <Button variant="contained" component={Link} to={"/detail/" + item.id}>
