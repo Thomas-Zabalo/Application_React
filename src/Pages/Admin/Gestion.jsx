@@ -94,7 +94,7 @@ function Gestion() {
                                     </CardContent>
                                     <Avatar
                                         src={item.icone}
-                                        sx={{ width: 200, height: 200, mb: 2 }}
+                                        sx={{ width: 200, height: 200, mb: 2, backgroundColor: "black" }}
                                         variant="rounded"
                                     />
                                     <CardActions>
