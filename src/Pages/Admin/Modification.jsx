@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Box, Stack, Card, Typography, Grid, Button, TextField, Avatar } from "@mui/material";
 import { useParams } from 'react-router-dom'; //
 import Sidebar from "../../components/Nav/Sidebar";
@@ -16,7 +16,6 @@ function Modification() {
     const [nom, setNom] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [image, setImage] = useState('');
 
     const [description, setDescription] = useState('');
     const [imagePreviewUrl, setImagePreviewUrl] = useState('');
@@ -24,14 +23,8 @@ function Modification() {
 
     //Affichage des informations du personnages
 
-    useEffect(() => {
-        const url = `https://zabalo.alwaysdata.net/sae401/api/${lien}/${id}`;
-        PersoUser(url);
-    }, [id]);
-
-
-    function PersoUser(url) {
-        console.log(accessToken);
+    const PersoUser = useCallback((url) => {
+        console.log("Access Token: ", accessToken);
 
         const fetchOptions = {
             method: "GET",
@@ -39,23 +32,25 @@ function Modification() {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${accessToken}`
             },
-
         };
         fetch(url, fetchOptions)
-            .then((response) => {
-                return response.json();
-            })
+            .then((response) => response.json())
             .then((dataJSON) => {
-                setDescription(dataJSON.description)
-                setNom(dataJSON.nom)
-                setName(dataJSON.name)
-                setEmail(dataJSON.email)
-                setImagePreviewUrl(dataJSON.icone)
+                setDescription(dataJSON.description);
+                setNom(dataJSON.nom);
+                setName(dataJSON.name);
+                setEmail(dataJSON.email);
+                setImagePreviewUrl(dataJSON.icone);
             })
             .catch((error) => {
-                console.error(error);
+                console.error('Error:', error);
             });
-    }
+    }, [accessToken]);
+
+    useEffect(() => {
+        const url = `https://zabalo.alwaysdata.net/sae401/api/${lien}/${id}`;
+        PersoUser(url);
+    }, [lien, id, PersoUser]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -115,10 +110,13 @@ function Modification() {
             });
     }
 
+
+
+
+
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setImage(file);
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImagePreviewUrl(reader.result);

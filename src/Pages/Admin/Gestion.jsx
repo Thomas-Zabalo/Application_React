@@ -19,7 +19,7 @@ function Gestion() {
 
     useEffect(() => {
         detail(url, accessToken);
-    }, [url]);
+    }, [url, accessToken]);
 
 
     function detail(url, accessToken) {

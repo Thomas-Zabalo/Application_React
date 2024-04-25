@@ -35,7 +35,7 @@ function Classe() {
                 navigate('/Nouveau')
             }, 2000);
         }
-    }, []);
+    }, [navigate, sousraceid]);
 
     function getClasses() {
         const fetchOptions = { method: "GET" };
