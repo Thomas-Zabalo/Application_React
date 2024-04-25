@@ -58,6 +58,8 @@ function Modification() {
         navigate(`/gestion/${lien}`)
     }
 
+
+
     function ModifPerso(url, Data, accessToken) {
         console.log(Data)
         const fetchOptions = {
@@ -67,6 +69,27 @@ function Modification() {
                 Authorization: `Bearer ${accessToken}`
             },
             body: JSON.stringify(Data)
+        };
+        fetch(url, fetchOptions)
+            .then((response) => {
+                return response.json();
+            })
+            .then(dataJSON => {
+                console.log(dataJSON)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    function ModifImage(url, formData, accessToken) {
+        console.log(formData)
+        const fetchOptions = {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+            body: formData
         };
         fetch(url, fetchOptions)
             .then((response) => {
@@ -90,7 +113,15 @@ function Modification() {
             };
             reader.readAsDataURL(file);
         }
-    };
+
+        const formData = new FormData();
+        formData.append('image', image);
+        const accessToken = localStorage.getItem('userToken');
+        const url = `https://zabalo.alwaysdata.net/sae401/api/${lien}/${id}/icone`;
+
+        ModifImage(url, formData, accessToken);
+    }
+
 
 
 
