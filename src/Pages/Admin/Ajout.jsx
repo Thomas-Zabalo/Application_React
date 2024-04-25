@@ -19,7 +19,7 @@ function Ajout() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (!nom || !description || !selectedItem || !image) {
+        if (!nom || !description || !image) {
             alert("Please ensure all fields are filled and a file is selected.");
             return;
         }
@@ -30,16 +30,29 @@ function Ajout() {
         formData.append('image', image);
 
         if (id === "sousraces") {
-            formData.append("races_id",selectedItem);
+            if (selectedItem) {
+                formData.append("races_id", selectedItem);
+            }
+            else {
+                alert("Please ensure all fields are filled and a file is selected.");
+                return;
+            }
         } else if (id === "sousclasses") {
-            formData.append("classes_id", selectedItem);
+            if (selectedItem) {
+                formData.append("classes_id", selectedItem);
+            }
+            else {
+                alert("Please ensure all fields are filled and a file is selected.");
+                return;
+            }
+
         }
 
         const accessToken = localStorage.getItem('userToken');
         const url = `https://zabalo.alwaysdata.net/sae401/api/${id}`;
 
         add(url, formData, accessToken);
-     
+
     }
 
     function add(url, formData, token) {

@@ -48,8 +48,7 @@ function Modification() {
         event.preventDefault();
         const Data = {
             nom: nom,
-            description: description,
-            icone: imagePreviewUrl
+            description: description
         };
         const accessToken = localStorage.getItem('userToken');
         const url = `https://zabalo.alwaysdata.net/sae401/api/${lien}/${id}`;
@@ -67,20 +66,21 @@ function Modification() {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${accessToken}`
-            },
+            }, 
             body: JSON.stringify(Data)
         };
         fetch(url, fetchOptions)
-            .then((response) => {
-                return response.json();
-            })
-            .then(dataJSON => {
-                console.log(dataJSON)
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        .then((response) => {
+            return response.json();
+        })
+        .then(dataJSON => {
+            console.log(dataJSON)
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     }
+
 
     function ModifImage(url, formData, accessToken) {
         console.log(formData)
@@ -104,8 +104,8 @@ function Modification() {
     }
 
     const handleImageChange = (e) => {
-        if (e.target.files[0]) {
-            const file = e.target.files[0];
+        const file = e.target.files[0];
+        if (file) {
             setImage(file);
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -115,14 +115,12 @@ function Modification() {
         }
 
         const formData = new FormData();
-        formData.append('image', image);
+        formData.append('image', file);
         const accessToken = localStorage.getItem('userToken');
         const url = `https://zabalo.alwaysdata.net/sae401/api/${lien}/${id}/icone`;
 
         ModifImage(url, formData, accessToken);
     }
-
-
 
 
     return (
