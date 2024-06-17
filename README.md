@@ -1,4 +1,8 @@
 # Application React Baldur Gate
 
-Voici l'application crée en React
+## Toute les informations complémentaire sont sur ce répositorie
+
+# Répository Back-end
+[https://github.com/Thomas-Zabalo/Application web et mobile](https://github.com/mmicastres/sae401-thomas-zabalo-etienne-gonella)
+
 
