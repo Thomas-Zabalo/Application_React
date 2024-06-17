@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -14,13 +14,15 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import { useAuth } from '../Authentification/AuthContext';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
 
 function Sidebar() {
+    const navigate = useNavigate();
     const { userAdmin, userToken, logout } = useAuth();
     const url = "https://zabalo.alwaysdata.net/sae401/api/logout";
 
     const accessToken = userToken;
-  
+
     function deconnexion() {
 
         const fetchOptions = {
@@ -47,6 +49,27 @@ function Sidebar() {
             });
     }
 
+    const handleHome = () => {
+        navigate('/');
+    };
+
+    const handleListe = () => {
+        navigate('/Liste/');
+    };
+
+    const handleNouveau = () => {
+        navigate('/Nouveau');
+    };
+
+    const handleProfil = () => {
+        navigate('/Profil');
+    };
+
+    const handleAdmin = () => {
+        navigate('/Admin');
+    };
+
+
 
     return (
         <Box sx={{ width: 250, flexShrink: 0 }}>
@@ -64,7 +87,7 @@ function Sidebar() {
             >
                 <Box sx={{ overflow: 'auto' }}>
                     <List>
-                        <ListItem disablePadding component={Link} to="/" sx={{ color: 'black', display: 'flex', alignItems: 'center' }}>
+                        <ListItem disablePadding onClick={handleHome} sx={{ color: 'black', display: 'flex', alignItems: 'center' }}>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <HomeIcon sx={{ minWidth: 0 }} />
@@ -72,7 +95,7 @@ function Sidebar() {
                                 <ListItemText primary="Accueil" />
                             </ListItemButton>
                         </ListItem>
-                        <ListItem disablePadding component={Link} to="/Liste" sx={{ color: 'black' }}>
+                        <ListItem disablePadding onClick={handleListe} sx={{ color: 'black' }}>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <FormatListBulletedIcon />
@@ -82,7 +105,7 @@ function Sidebar() {
                         </ListItem>
 
                         {userToken && (
-                            <ListItem disablePadding component={Link} to="/Nouveau" sx={{ color: 'black' }}>
+                            <ListItem disablePadding onClick={handleNouveau} sx={{ color: 'black' }}>
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <AddCircleIcon />
@@ -92,7 +115,7 @@ function Sidebar() {
                             </ListItem>
                         )}
 
-                        <ListItem disablePadding component={Link} to="/Profil" sx={{ color: 'black' }}>
+                        <ListItem disablePadding onClick={handleProfil} sx={{ color: 'black' }}>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <FaceIcon />
@@ -102,7 +125,7 @@ function Sidebar() {
                         </ListItem>
 
                         {userAdmin === 'admin' && (
-                            <ListItem disablePadding component={Link} to="/Admin" sx={{ color: 'black' }}>
+                            <ListItem disablePadding onClick={handleAdmin} sx={{ color: 'black' }}>
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <SupervisorAccountIcon />
@@ -112,7 +135,7 @@ function Sidebar() {
                             </ListItem>
                         )}
                         {userToken && (
-                            <ListItem disablePadding component={Link} to="/" sx={{ color: 'black' }} >
+                            <ListItem disablePadding onClick={handleHome} sx={{ color: 'black' }} >
                                 <ListItemButton onClick={deconnexion}>
                                     <ListItemIcon>
                                         <LogoutIcon />

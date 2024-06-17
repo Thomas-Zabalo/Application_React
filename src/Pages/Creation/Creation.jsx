@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import Sidebar from "../../components/Nav/Sidebar";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -19,12 +19,7 @@ function Creation() {
     const id = location.state ? location.state.id : null;
 
 
-    useEffect(() => {
-        const url = `https://zabalo.alwaysdata.net/sae401/api/personnages/${id}`;
-        PersoDetail(url);
-    }, [id]);
-
-    function PersoDetail(url) {
+    const PersoDetail = useCallback((url) => {
         const fetchOptions = {
             method: "GET",
             headers: {
@@ -42,8 +37,12 @@ function Creation() {
             .catch((error) => {
                 console.error(error);
             });
-    };
+    }, [accessToken]);
 
+    useEffect(() => {
+        const url = `https://zabalo.alwaysdata.net/sae401/api/personnages/${id}`;
+        PersoDetail(url);
+    }, [id, PersoDetail]);
 
     return (
         <Box sx={{ display: 'flex' }}>

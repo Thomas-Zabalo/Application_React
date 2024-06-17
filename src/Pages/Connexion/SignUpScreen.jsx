@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-    Button, TextField, Link, Grid, Box, Typography, Container, CssBaseline, Snackbar, IconButton
+    Button, TextField, Grid, Box, Typography, Container, CssBaseline, Snackbar, IconButton
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
@@ -40,7 +40,7 @@ export default function SignUpScreen() {
             };
             console.log(userData)
             getUtilisateur(userData);
-        } 
+        }
         else {
             setSnackbarMessage('Veuillez remplir tous les champs.');
             setOpenSnackbar(true);
@@ -63,16 +63,16 @@ export default function SignUpScreen() {
         fetch(url, fetchOptions)
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error('Erreur lors de la création du compte'); 
+                    throw new Error('Erreur lors de la création du compte');
                 }
-                return response.json(); 
+                return response.json();
             })
             .then((dataJSON) => {
                 console.log(dataJSON);
                 setSnackbarMessage("Compte créé avec succès !");
                 setOpenSnackbar(true);
                 setTimeout(() => {
-                    navigate('/Login'); 
+                    navigate('/Login');
                 }, 1500);
             })
             .catch((error) => {
@@ -82,13 +82,15 @@ export default function SignUpScreen() {
             });
     }
 
-
-
     const handleCloseSnackbar = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
         setOpenSnackbar(false);
+    };
+
+    const handleNavigate = () => {
+        navigate('/Login');
     };
 
     return (
@@ -172,9 +174,9 @@ export default function SignUpScreen() {
                                 </Typography>
                             </Grid>
                             <Grid item>
-                                <Link href="Login" variant="body2">
-                                    {"Connectez-vous !"}
-                                </Link>
+                                <Typography variant="body2" onClick={handleNavigate} sx={{ color: 'blue' }} style={{ cursor: 'pointer' }}>
+                                    Connectez-vous
+                                </Typography>
                             </Grid>
                         </Grid>
                     </Box>

@@ -14,10 +14,12 @@ function Modification() {
     const accessToken = localStorage.getItem('userToken');
 
     const [nom, setNom] = useState('');
+    const [description, setDescription] = useState('');
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
 
-    const [description, setDescription] = useState('');
+
     const [imagePreviewUrl, setImagePreviewUrl] = useState('');
 
 
@@ -109,8 +111,6 @@ function Modification() {
                 console.error(error);
             });
     }
-
-
 
 
 

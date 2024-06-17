@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Card, CardContent, CardActions, Button, Typography, Grid, Avatar } from "@mui/material";
 import Personnage from "../../models/PersonnageController";
@@ -8,15 +8,14 @@ import Sidebar from "../../components/Nav/Sidebar";
 import Stack from '@mui/material/Stack';
 import SearchBar from "../../components/Home/SearchBar";
 import TextListe from "../../components/Home/TextList";
+import { useNavigate } from 'react-router-dom';
 
 export default function Liste() {
-
+    const navigate = useNavigate();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     let nom = searchParams.get('nom');
 
-
-    console.log(nom)
     const [lPerso, setLPerso] = useState([]);
     let url = "https://zabalo.alwaysdata.net/sae401/api/personnages";
 
@@ -24,11 +23,7 @@ export default function Liste() {
         url += '?nom=' + nom
     }
 
-    useEffect(() => {
-        getPersonnage();
-    }, []);
-
-    function getPersonnage() {
+    const getPersonnage = useCallback((url) => {
         const fetchOptions = { method: "GET" };
         fetch(url, fetchOptions)
             .then((response) => response.json())
@@ -55,7 +50,17 @@ export default function Liste() {
             .catch((error) => {
                 console.log(error);
             });
-    }
+    }, [])
+    console.log(lPerso)
+
+    useEffect(() => {
+        getPersonnage(url);
+    }, [getPersonnage, url]);
+
+    const handleDetail = (id) => {
+        console.log(id)
+        navigate(`/detail/${id}`);
+    };
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -88,7 +93,7 @@ export default function Liste() {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button variant="contained" href={"/detail/" + item.id}>Details</Button>
+                                <Button variant="contained" onClick={() => handleDetail(item.id)}>Details</Button>
                                 </CardActions>
                             </Card>
                         </Grid>

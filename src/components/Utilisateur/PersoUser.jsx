@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardActions, Button, Typography, Grid, Box, Avatar, } from "@mui/material";
 import Personnage from "../../models/PersonnageController";
-import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 function PersoUser() {
-
-    const [lPerso, setLPerso] = useState([]);
     const navigate = useNavigate();
+    const [lPerso, setLPerso] = useState([]);
 
     useEffect(() => {
         const accessToken = localStorage.getItem('userToken');
@@ -76,6 +74,15 @@ function PersoUser() {
             });
     }
 
+    const handleModifier = (id) => {
+        navigate('/Modifier/' + id); 
+    };
+
+    const handleDetail = (id) => {
+        console.log(id)
+        navigate(`/detail/${id}`); 
+    };
+
 
 
 
@@ -94,7 +101,7 @@ function PersoUser() {
                                 <Typography sx={{ mb: 1.5 }} color="text.secondary">{item.sousclasses.nom}</Typography>
                             </CardContent>
                             <CardActions>
-                                <Button variant="contained" component={Link} to={"/detail/" + item.id}>
+                                <Button variant="contained" onClick={() => handleDetail(item.id)}>
                                     Details
                                 </Button>
                                 <Button variant="contained" sx={{
@@ -102,7 +109,7 @@ function PersoUser() {
                                     '&:hover': {
                                         backgroundColor: '#E59C03'
                                     }
-                                }} component={Link} to={"/Modifier/" + item.id}>Modifier</Button>
+                                }} onClick={() => handleModifier(item.id)}>Modifier</Button>
 
                                 <Button variant="contained" sx={{
                                     backgroundColor: 'error.main',

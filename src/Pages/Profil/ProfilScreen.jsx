@@ -7,7 +7,6 @@ import PersoUser from '../../components/Utilisateur/PersoUser';
 function ProfilScreen() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [image, setImage] = useState("");
     const [imagePreviewUrl, setImagePreviewUrl] = useState('');
     const userId = localStorage.getItem('userData');
 
@@ -104,7 +103,6 @@ function ProfilScreen() {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setImage(file);
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImagePreviewUrl(reader.result);

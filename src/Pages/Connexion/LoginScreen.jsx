@@ -3,7 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import VpnKeyRoundedIcon from '@mui/icons-material/VpnKeyRounded';
@@ -73,6 +72,10 @@ export default function LoginScreen() {
                 console.error('Error:', error);
             });
     }
+
+    const handleNavigate = () => {
+        navigate('/signup');
+    };
 
 
     return (
@@ -146,9 +149,9 @@ export default function LoginScreen() {
                                     </Typography>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="SignUp" variant="body2">
-                                        {"Créez un compte !"}
-                                    </Link>
+                                    <Typography variant="body2" onClick={handleNavigate} sx={{ color: 'blue' }} style={{ cursor: 'pointer' }}>
+                                        Créez un compte !
+                                    </Typography>
                                 </Grid>
                             </Grid>
                         </Box>

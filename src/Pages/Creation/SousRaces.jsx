@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Grid, Card, CardContent, CardActions, Typography, Button, IconButton, CardMedia, Box, Snackbar } from '@mui/material';
 import Sidebar from "../../components/Nav/Sidebar";
 import { useLocation } from 'react-router-dom';
@@ -19,11 +19,25 @@ function SousRace() {
     const raceid = location.state ? location.state.raceid : null;
 
     // Construct the API URL with the raceId
-    const url = `https://zabalo.alwaysdata.net/sae401/api/races/${raceid}`;
+
+    const getSousRaces = useCallback((url) => {
+        const fetchOptions = { method: "GET" };
+        fetch(url, fetchOptions)
+            .then(response => {
+                return response.json();
+            })
+            .then(dataJSON => {
+                setSousRaces(dataJSON.sousraces);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }, [])
 
     useEffect(() => {
+        const url = `https://zabalo.alwaysdata.net/sae401/api/races/${raceid}`;
         if (raceid) {
-            getSousRaces();
+            getSousRaces(url);
         } else {
             setSnackbarMessage("Veuillez selectionner une race !");
             setOpenSnackbar(true);
@@ -31,21 +45,9 @@ function SousRace() {
                 navigate('/Nouveau')
             }, 2000);
         }
-    }, []);
+    }, [getSousRaces, navigate, raceid]);
 
-    function getSousRaces() {
-        const fetchOptions = { method: "GET" };
-        fetch(url, fetchOptions)
-            .then(response => {
-                return response.json();
-            })
-            .then(dataJSON=> {
-                setSousRaces(dataJSON.sousraces);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
+
 
 
     const toggleSelect = (itemId) => {
@@ -54,7 +56,7 @@ function SousRace() {
         setSelectedSousRace(selected);
     };
 
-    const handleCloseSnackbar = ( reason) => {
+    const handleCloseSnackbar = (reason) => {
         if (reason === 'clickaway') {
             return;
         }

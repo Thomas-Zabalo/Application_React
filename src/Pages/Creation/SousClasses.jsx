@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Grid, Card, CardContent, CardActions, Typography, Button, IconButton, CardMedia, Box, Snackbar } from '@mui/material';
 import Sidebar from "../../components/Nav/Sidebar";
 import { useLocation } from 'react-router-dom';
@@ -20,16 +20,24 @@ function SousClasse() {
     const classeid = location.state ? location.state.classeid : null;
     const raceid = location.state ? location.state.raceid : null;
 
-
-    const url = `https://zabalo.alwaysdata.net/sae401/api/classes/${classeid}`;
+    const getSousClasses = useCallback((url) => {
+        const fetchOptions = { method: "GET" };
+        fetch(url, fetchOptions)
+            .then(response => {
+                return response.json();
+            })
+            .then(dataJSON => {
+                setSousClasses(dataJSON.sousclasses);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    })
 
     useEffect(() => {
-        getSousClasses();
-    }, []);
-
-    useEffect(() => {
+        const url = `https://zabalo.alwaysdata.net/sae401/api/classes/${classeid}`;
         if (sousraceid && classeid) {
-            getSousClasses();
+            getSousClasses(url);
         } else if (!classeid && sousraceid) {
             setSnackbarMessage("Veuillez selectionner une classe !");
             setOpenSnackbar(true);
@@ -44,23 +52,9 @@ function SousClasse() {
                 navigate('/Nouveau')
             }, 2000);
         }
-    }, []);
+    }, [sousraceid, classeid, navigate, getSousClasses]);
 
-    function getSousClasses() {
-        const fetchOptions = { method: "GET" };
-        fetch(url, fetchOptions)
-            .then(response => {
-                return response.json();
-            })
-            .then(dataJSON => {
-                setSousClasses(dataJSON.sousclasses);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
-
-
+  
     const toggleSelect = (itemId) => {
         setSelectedItem(itemId);
         const selected = SousClasses.find(SousClasse => SousClasse.id === itemId);

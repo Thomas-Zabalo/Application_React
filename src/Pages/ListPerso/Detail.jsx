@@ -59,9 +59,10 @@ function Detail() {
                                     alignSelf: 'center',
                                     textAlign: 'center',
                                     fontSize: 'clamp(1rem,3vw, 4rem)',
+                                    fontWeight: 'bold'
                                 }}
                             >
-                                <h3>Personnage de {dPerso.user.name}</h3>
+                                Personnage de {dPerso.user.name}
                             </Typography>
                             <h2>{dPerso.nom}</h2>
                             <Dashboard dPerso={dPerso} />
